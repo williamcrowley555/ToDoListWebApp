@@ -19,7 +19,9 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" ></script>
+ </head>
 </head>
 
 <body id="page-top">
@@ -361,7 +363,57 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
-
+                    <div class="row">
+                        <h2>Simple Pagination Example using Datatables Js Library</h2>
+                        <table class="table table-fluid col-xl-5 col-lg-6" id="myTable">
+                           <thead class = "thead-dark">
+                               <tr>
+                                 <th scope="col">#</th>
+                                 <th scope="col">First</th>
+                                 <th scope="col">Last</th>
+                                 <th scope="col">Handle</th>
+                               </tr>
+                             </thead>
+                             <tbody>
+                               <tr>
+                                 <th scope="row">1</th>
+                                 <td>Mark</td>
+                                 <td>Otto</td>
+                                 <td>@mdo</td>
+                               </tr>
+                               <tr>
+                                 <th scope="row">2</th>
+                                 <td>Jacob</td>
+                                 <td>Thornton</td>
+                                 <td>@fat</td>
+                               </tr>
+                               <tr>
+                                 <th scope="row">3</th>
+                                 <td>Larry</td>
+                                 <td>the Bird</td>
+                                 <td>@twitter</td>
+                               </tr>
+                               <tr>
+                                 <th scope="row">4</th>
+                                 <td>Larry</td>
+                                 <td>the Bird</td>
+                                 <td>@twitter</td>
+                               </tr>
+                               <tr>
+                                 <th scope="row">5</th>
+                                 <td>Larry</td>
+                                 <td>the Bird</td>
+                                 <td>@twitter</td>
+                               </tr>
+                               <tr>
+                                 <th scope="row">6</th>
+                                 <td>Larry</td>
+                                 <td>the Bird</td>
+                                 <td>@twitter</td>
+                               </tr>
+                             </tbody>
+                        </table>
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
 
@@ -418,7 +470,11 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-
+    <script>
+        $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+        </script>
 </body>
 
 </html>
