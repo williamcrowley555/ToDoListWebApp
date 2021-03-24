@@ -1743,6 +1743,12 @@ pre code {
   border-color: #e3e6f0;
 }
 
+.table .thead-success th {
+  color: #fff;
+  background-color: #1cc88a;
+  border-color: #6c6e7e;
+}
+
 .table-dark {
   color: #fff;
   background-color: #5a5c69;
