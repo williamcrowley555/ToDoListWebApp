@@ -1,11 +1,11 @@
 package com.william.todolist.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,6 +29,17 @@ public class User {
     @NotBlank
     @Pattern(regexp = "^[A-Za-z]+$")
     private String lastName;
+
+    @Column(name = "dob", nullable = false)
+    @NotBlank
+    @DateTimeFormat(pattern = "dd/mm/yyyy")
+    private Date dob;
+
+    @Column(name = "gender", nullable = false)
+    @NotBlank
+    @Min(value = 0)
+    @Max(value = 5)
+    private Integer gender;
 
     @Column(name = "email", nullable = false)
     @NotBlank
@@ -58,9 +69,11 @@ public class User {
         this.id = id;
     }
 
-    public User(@NotBlank @Pattern(regexp = "^[A-Za-z ]+$") String firstName, @NotBlank @Pattern(regexp = "^[A-Za-z]+$") String lastName, @NotBlank String email, @NotBlank @Size(min = 5, message = "Password must be at least 5 characters") String password, @Valid Set<Role> roles) {
+    public User(@NotBlank @Pattern(regexp = "^[A-Za-z ]+$") String firstName, @NotBlank @Pattern(regexp = "^[A-Za-z]+$") String lastName, @NotBlank Date dob, @NotBlank @Min(value = 0) @Max(value = 5) Integer gender, @NotBlank @Email String email, @NotBlank @Size(min = 5, message = "Password must be at least 5 characters") String password, @Valid Set<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.dob = dob;
+        this.gender = gender;
         this.email = email;
         this.password = password;
         this.roles = roles;
