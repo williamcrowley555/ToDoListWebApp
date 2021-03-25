@@ -11,7 +11,7 @@
     
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>To Do List</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -40,10 +40,10 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                <div class="sidebar-brand-icon">
+                    <i class="fas fa-calendar"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">Admin</div>
             </a>
 
             <!-- Divider -->
@@ -73,7 +73,7 @@
 
             <li class="nav-item">
                 <a class="nav-link" href="#">                
-                    <span>QUẢN LÝ PHÂN CÔNG</span></a>
+                    <span>QUẢN LÝ NHÂN VIÊN</span></a>
             </li>
 
             <!-- Divider -->
@@ -100,22 +100,13 @@
 
                     <!-- Page Heading -->
                       
-                    <div class="row mt-4 mb-4 mr-3">
-                        <div class="col-xl-5 col-md-6">
+                    <div class="container-fluid mt-4 mb-4 mr-3">                      
                             <h1 class="h3 mb-0 text-gray-800">Quản Lý Công Việc</h1>
-                        </div>
-                        <div class="col-xl-5 col-md-6">
-                            
-                        </div>
-                        <div class="col-xl-2 col-md-6">
                             <a href="./add-work.html">
-                                <button type="button" class="btn  btn-success"> 
-                                    <i class="fas fa-plus mr-2"></i> Lập Công Việc
+                                <button type="button" class="btn  btn-success mt-4"> 
+                                    <i class="fas fa-plus mr-2"></i> Thêm Công Việc
                                 </button>
-                            </a>
-                        </div>
-                        
-                       
+                            </a> 
                     </div>
 
                     
@@ -128,19 +119,21 @@
                         <table class="table table-fluid" id="worksTable">
                             <thead>
                                 <tr>
-                                  <th scope="col">Day</th>
-                                  <th scope="col">Article Name</th>
-                                  <th scope="col">Author</th>
-                                  <th scope="col">Shares</th>
-                                  <th scope="col">Actions</th>
+                                  <th scope="col">Tiêu Đề</th>
+                                  <th scope="col">Ngày Bắt Đầu</th>
+                                  <th scope="col">Ngày kết Thúc</th>
+                                  <th scope="col">Phạm Vi</th>
+                                  <th scope="col">Trạng Thái Công Việc</th>
+                                  <th scope="col">Thao Tác</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr>
-                                  <th scope="row">1</th>
-                                  <td>Bootstrap 4 CDN and Starter Template</td>
-                                  <td>Cristina</td>
-                                  <td>2.846</td>
+                                  <th scope="row">Soạn Tài Liệu</th>
+                                  <td>21/04/2021</td>
+                                  <td>29/04/2021</td>
+                                  <td>Public</td>
+                                  <td>Đang Thực Hiện</td>
                                   <td>
                                     <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
                                     <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
@@ -149,10 +142,11 @@
                                   </td>
                                 </tr>
                                 <tr>
-                                  <th scope="row">2</th>
-                                  <td>Bootstrap Grid 4 Tutorial and Examples</td>
-                                  <td>Cristina</td>
-                                  <td>3.417</td>
+                                    <th scope="row">Soạn Tài Liệu</th>
+                                    <td>21/04/2021</td>
+                                    <td>29/04/2021</td>
+                                    <td>Public</td>
+                                    <td>Đang Thực Hiện</td>
                                   <td>
                                     <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
                                     <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
@@ -161,10 +155,11 @@
                                   </td>
                                 </tr>
                                 <tr>
-                                  <th scope="row">3</th>
-                                  <td>Bootstrap Flexbox Tutorial and Examples</td>
-                                  <td>Cristina</td>
-                                  <td>1.234</td>
+                                    <th scope="row">Soạn Tài Liệu</th>
+                                    <td>21/04/2021</td>
+                                    <td>29/04/2021</td>
+                                    <td>Public</td>
+                                    <td>Đang Thực Hiện</td>
                                   <td>
                                     <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
                                     <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
