@@ -47,6 +47,23 @@
                                             placeholder="Tên">
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <label class="mb-2 ml-2">Ngày sinh: </label>
+                                        <input type="date" class="form-control form-control-user" onkeydown="return false">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                <div class="col-sm-6">
+                                        <div>
+                                            <label class="px-2">Giới tính: </label>
+                                            <input type="radio" id="male" name="gender" value="male" checked>
+                                            <label class="mr-2" for="male">Nam</label>
+                                            <input type="radio" id="female" name="gender" value="female">
+                                            <label for="female">Nữ</label>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                         <input type="email" class="form-control form-control-user" id="exampleInputEmail" 
                                             aria-describedby="emailHelp" placeholder="Email">
@@ -54,6 +71,13 @@
                                 <div class="form-group">
                                         <input type="password" class="form-control form-control-user"
                                             id="exampleInputPassword" placeholder="Mật khẩu">
+                                </div>
+                                <div class="mb-2 ml-2">Chức vụ: </div>
+                                <div class="form-group">
+                                    <select class="form-control">
+                                      <option>Giám đốc</option>
+                                      <option>Nhân viên</option>
+                                    </select>
                                 </div>
                                 <a href="login.html" class="btn btn-primary btn-user btn-block">
                                     Đăng kí tài khoản
