@@ -4,13 +4,13 @@
 
 <body class="bg-gradient-primary">
 
-    <div class="container">
+<div class="container">
 
-        <div class="card o-hidden border-0 shadow-lg my-5">
-            <div class="card-body p-0">
-                <!-- Nested Row within Card Body -->
-                <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
@@ -20,20 +20,44 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Họ">
+                                               placeholder="Họ">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="Tên">
+                                               placeholder="Tên">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <label class="mb-2 ml-2">Ngày sinh: </label>
+                                        <input type="date" class="form-control form-control-user" onkeydown="return false">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <div>
+                                            <label class="px-2">Giới tính: </label>
+                                            <input type="radio" id="male" name="gender" value="male" checked>
+                                            <label class="mr-2" for="male">Nam</label>
+                                            <input type="radio" id="female" name="gender" value="female">
+                                            <label for="female">Nữ</label>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail" 
-                                            aria-describedby="emailHelp" placeholder="Email">
+                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                           aria-describedby="emailHelp" placeholder="Email">
                                 </div>
                                 <div class="form-group">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Mật khẩu">
+                                    <input type="password" class="form-control form-control-user"
+                                           id="exampleInputPassword" placeholder="Mật khẩu">
+                                </div>
+                                <div class="mb-2 ml-2">Chức vụ: </div>
+                                <div class="form-group">
+                                    <select class="form-control">
+                                        <option>Giám đốc</option>
+                                        <option>Nhân viên</option>
+                                    </select>
                                 </div>
                                 <a href="login.html" class="btn btn-primary btn-user btn-block">
                                     Đăng kí tài khoản
@@ -45,11 +69,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
-
     </div>
+
+</div>
 
     <th:block th:replace="script :: script"></th:block>
 
