@@ -29,12 +29,13 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon">
-                    <i class="fas fa-user"></i>
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3"> Admin </div>
+                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
             </a>
 
             <!-- Divider -->
@@ -52,7 +53,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Quản Lý
+                QUẢN LÝ
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -66,6 +67,15 @@
                 <a class="nav-link" href="#">                
                     <span>QUẢN LÝ PHÂN CÔNG</span></a>
             </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
         </ul>
         <!-- End of Sidebar -->
 
@@ -275,6 +285,7 @@
                         </li>
 
                     </ul>
+                    <!-- End of Sidebar -->
 
                 </nav>
                 <!-- End of Topbar -->
@@ -283,87 +294,103 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 	                <!-- Page Heading -->
-	                <a href="index.html" class="btn btn-primary btn-icon-split">
-	                    <span class="icon text-white-50">
-	                        <i class="fas fa-arrow-left"></i>
-	                    </span>
-	                  	<span class="text">Quay trở lại trang chủ</span>
-	                </a>
+	                <div class="text-center">
+	                	<h1 class="h1 text-gray-900"> Thêm nhân viên vào công việc </h1>
+	                </div>
 	                <div class="my-4"></div>
 
-					<div class="row">
-						<!-- Left Contain -->
-						<div class="col-lg-6">
-							<div class="card">
-								<div class="text-center">
-									<h1 class="h1 text-gray-900"> Chi tiết công việc </h1>
-								</div>
-				                
-				                <div class="table-responsive">
-				                	<table class="table table-fluid" id="tblChiTietCongViec">
-				                   		<tbody>
-				                   			<tr>
-				                   				<th class="text-gray-900"> Mã công việc </th>
-				                   				<th> 1 </th>
-				                   			</tr>
-				                   			<tr>
-				                   				<th class="text-gray-900"> Người tạo công việc </th>
-				                   				<th> Phạm Đức Khải </th>
-				                   			</tr>
-				                   			<tr>
-				                   				<th class="text-gray-900"> Tên công việc </th>
-				                   				<th> Lập danh sách nhân viên </th>
-				                   			</tr>
-				                   			<tr>
-				                   				<th class="text-gray-900"> Ngày bắt đầu </th>
-				                   				<th> 20-03-2021 </th>
-				                   			</tr>
-				                   			<tr>
-				                   				<th class="text-gray-900"> Ngày kết thúc </th>
-				                   				<th> 21-03-2021 </th>
-				                   			</tr>
-				                   			<tr>
-				                   				<th class="text-gray-900"> Phạm vi </th>
-				                   				<th> Cá nhân </th>
-				                   			</tr>
-				                   			<tr>
-				                   				<th class="text-gray-900"> Trạng thái </th>
-				                   				<th> Chưa hoàn thành </th>
-				                   			</tr>
-				                   			<tr>
-				                   				<th class="text-gray-900"> Số người tham gia </th>
-				                   				<th> 1 </th>
-				                   			</tr>
-				                   			<tr>
-				                   				<th class="text-gray-900"> Tên thành viên </th>
-				                   				<th> Phạm Đức Khải </th>
-				                   			</tr>
-				                   		</tbody>
-				                   	</table>
-				                </div>
-				            </div>
-			            </div>
-			            <!-- End of Left Contain -->
+					<div class="">
+                        <span class="iwt text-gray-900">
+                        	<i class="fas fa-list"></i>
+                        	<span class="h5 font-weight-bold">
+								Bảng danh sách nhân viên tham gia
+							</span>
+						</span>
+                    </div>
+                    <!-- tblDanhSachNhanVienThamGia -->
+					<div class="card shadow mb-4">						
+						<div class="table-responsive">
+	                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+	                            <thead class="text-center thead-dark">
+	                                <tr>
+	                                    <th>Mã nhân viên</th>
+	                    				<th>Họ và tên</th>
+	                                    <th>Ngày sinh</th>
+	                                    <th>Số CMND</th>
+	                                    <th>Giới tính</th>
+	                                    <th>Địa chỉ</th>
+	                                    <th>Số điện thoại</th>
+	                                    <th>Chức vụ</th>
+	                                	<th>Thao tác xử lý</th>
+	                            	</tr>
+	                            </thead>
+	                            <tbody class="text-center">
+	                            	<tr>
+	                                	<th>3118410179</th>
+	                                	<th>Phạm Đức Khải</th>
+	                                	<th>23-06-2000</th>
+	                                	<th>021233434</th>
+	                                	<th>Nam</th>
+	                                	<th>Đại học Sài Gòn</th>
+	                                	<th>0919651532</th>
+	                                	<th>Nhân viên</th>
+	                                	<th>
+	                                		<button class="btn btn-danger">Xóa</button>
+	                                	</th>
+	                                </tr>
+	                            </tbody>
+	                        </table>
+	                    </div>
+					</div>
+					<!-- End of tblDanhSachNhanVienThamGia -->
 
-			            <!-- Right Contain -->
-			            <div class="col-lg-6">
-			            	<div class="card">
-				            	<div class="card-body">
-				            		<div class="text-center">
-						            	<button type="button" class="btn btn-success"> 
-						            		Bình luận
-						            	</button>
-						            	<button type="button" class="btn btn-danger"> 
-						            		Nhắc nhở
-						            	</button>
-		                            </div>
-	                            </div>
-	                        </div>
-			            </div>
-			            <!-- End of Right Contain -->
+	                <div class="my-4"></div>
 
-		            </div>
-		            <!-- End of Row Divine -->
+	                <div class="">
+                        <span class="iwt text-gray-900">
+                        	<i class="fas fa-list"></i>
+                        	<span class="h5 font-weight-bold">
+								Bảng danh sách nhân viên
+							</span>
+						</span>
+                    </div>
+
+	                <!-- tblDanhSachNhanVien -->
+					<div class="card shadow mb-4">						
+						<div class="table-responsive">
+	                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+	                            <thead class="text-center thead-dark">
+	                                <tr>
+	                                    <th>Mã nhân viên</th>
+	                    				<th>Họ và tên</th>
+	                                    <th>Ngày sinh</th>
+	                                    <th>Số CMND</th>
+	                                    <th>Giới tính</th>
+	                                    <th>Địa chỉ</th>
+	                                    <th>Số điện thoại</th>
+	                                    <th>Chức vụ</th>
+	                                	<th>Thao tác xử lý</th>
+	                            	</tr>
+	                            </thead>
+	                            <tbody class="text-center">
+	                            	<tr>
+	                                	<th>311841????</th>
+	                                	<th>Hà Minh Khôi</th>
+	                                	<th>??-??-2000</th>
+	                                	<th>021233434</th>
+	                                	<th>Nam</th>
+	                                	<th>Đại học Sài Gòn</th>
+	                                	<th>0919651532</th>
+	                                	<th>Giám đốc</th>
+	                                	<th>
+	                                		<button class="btn btn-success">Thêm</button>
+	                                	</th>
+	                                </tr>
+	                            </tbody>
+	                        </table>
+	                    </div>
+					</div>
+					<!-- End of tblDanhSachNhanVien -->
 
 	            </div>
                 <!-- End of Page Content -->
