@@ -105,16 +105,14 @@
                     <!-- tblDanhSachNhanVienThamGia -->
 					<div class="card shadow mb-4">						
 						<div class="table-responsive">
-	                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+	                        <table class="table table-bordered" id="tblDanhSachNhanVienThamGia" width="100%" cellspacing="0">
 	                            <thead class="text-center thead-dark">
 	                                <tr>
 	                                    <th>Mã nhân viên</th>
 	                    				<th>Họ và tên</th>
 	                                    <th>Ngày sinh</th>
-	                                    <th>Số CMND</th>
+	                                    <th>Email</th>
 	                                    <th>Giới tính</th>
-	                                    <th>Địa chỉ</th>
-	                                    <th>Số điện thoại</th>
 	                                    <th>Chức vụ</th>
 	                                	<th>Thao tác xử lý</th>
 	                            	</tr>
@@ -124,13 +122,11 @@
 	                                	<th>3118410179</th>
 	                                	<th>Phạm Đức Khải</th>
 	                                	<th>23-06-2000</th>
-	                                	<th>021233434</th>
+	                                	<th>duckhai0623@gmail.com</th>
 	                                	<th>Nam</th>
-	                                	<th>Đại học Sài Gòn</th>
-	                                	<th>0919651532</th>
 	                                	<th>Nhân viên</th>
 	                                	<th>
-	                                		<button class="btn btn-danger">Xóa</button>
+	                                		<button class="btn btn-danger btnDelete" id="xoa">Xóa</button>
 	                                	</th>
 	                                </tr>
 	                            </tbody>
@@ -153,32 +149,30 @@
 	                <!-- tblDanhSachNhanVien -->
 					<div class="card shadow mb-4">						
 						<div class="table-responsive">
-	                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+	                        <table class="table table-bordered" id="tblDanhSachNhanVien" width="100%" cellspacing="0">
 	                            <thead class="text-center thead-dark">
 	                                <tr>
 	                                    <th>Mã nhân viên</th>
 	                    				<th>Họ và tên</th>
 	                                    <th>Ngày sinh</th>
-	                                    <th>Số CMND</th>
+	                                    <th>Email</th>
 	                                    <th>Giới tính</th>
-	                                    <th>Địa chỉ</th>
-	                                    <th>Số điện thoại</th>
 	                                    <th>Chức vụ</th>
 	                                	<th>Thao tác xử lý</th>
 	                            	</tr>
 	                            </thead>
 	                            <tbody class="text-center">
 	                            	<tr>
-	                                	<th>311841????</th>
-	                                	<th>Hà Minh Khôi</th>
-	                                	<th>??-??-2000</th>
-	                                	<th>021233434</th>
-	                                	<th>Nam</th>
-	                                	<th>Đại học Sài Gòn</th>
-	                                	<th>0919651532</th>
-	                                	<th>Giám đốc</th>
+	                                	<th id="id">3118410202</th>
+	                                	<th id="hoTen">Hà Minh Khôi</th>
+	                                	<th id="ngaySinh">??-??-2000</th>
+	                                	<th id="email">haminhkhoi@gmail.com</th>
+	                                	<th id="gioitinh">Nam</th>
+	                                	<th id="chucVu">Giám đốc</th>
 	                                	<th>
-	                                		<button class="btn btn-success">Thêm</button>
+	                                		<button type="button" class="btn btn-success btnAdd" id="them">
+	                                			Thêm
+	                                		</button>
 	                                	</th>
 	                                </tr>
 	                            </tbody>
@@ -197,5 +191,22 @@
         <!-- End of Content Wrapper -->
     </div>
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$("#tblDanhSachNhanVien").on('click', '.btnAdd', function() {
+			$(this).closest('tr').find('#them').text("Xóa");
+			// alert($(this).closest('tr').find('#them').html("abc"));
+		    var currow = $(this).closest('tr').html();
+		    $("#tblDanhSachNhanVienThamGia").append("<tr>" + currow + "</tr>");
+		    $(this).closest('tr').remove();
+		});
+
+		$("#tblDanhSachNhanVienThamGia").on('click', '.btnDelete', function() {
+			var currow = $(this).closest('tr').html();
+	    	$("#tblDanhSachNhanVien").append("<tr>" + currow + "</tr>");
+	    	$(this).closest('tr').remove();
+		});
+	</script>
 </body>
+
 </html>

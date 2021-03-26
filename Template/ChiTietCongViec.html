@@ -100,6 +100,7 @@
 									<h1 class="h1 text-gray-900"> Chi tiết công việc </h1>
 								</div>
 				                
+                                <!-- tblChiTietCongVien -->
 				                <div class="table-responsive">
 				                	<table class="table table-fluid" id="tblChiTietCongViec">
 				                   		<tbody>
@@ -139,9 +140,23 @@
 				                   				<th class="text-gray-900"> Tên thành viên </th>
 				                   				<th> Phạm Đức Khải </th>
 				                   			</tr>
+                                            <tr>
+                                                <th class="text-gray-900"> Thêm File </th>
+                                                <th>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend"></div>
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input " name="document">
+                                                            <label class="custom-file-label" for="inputGroupFile01">Chọn file</label>
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                            </tr>
 				                   		</tbody>
 				                   	</table>
 				                </div>
+                                <!-- End of tblChiTietCongVien -->
+
 				            </div>
 			            </div>
 			            <!-- End of Left Contain -->
@@ -158,6 +173,9 @@
 						            		Nhắc nhở
 						            	</button>
 		                            </div>
+                                    <div class="my-4">
+                                        <input type="text" class="form-control form-rounded" placeholder="Nhập bình luận">
+                                    </div>
 	                            </div>
 	                        </div>
 			            </div>
