@@ -126,7 +126,8 @@
 	                                	<th>Nam</th>
 	                                	<th>Nhân viên</th>
 	                                	<th>
-	                                		<a href="" class="btn btn-danger delete">
+	                                		<a class="btn btn-danger delete">
+	                                		<!-- <a href="" class="btn btn-danger delete"> -->
 	                                			Xóa
 	                                		</a>
 	                                	</th>
@@ -165,23 +166,35 @@
 	                            </thead>
 	                            <tbody class="text-center">
 	                            	<tr>
-	                                	<th class="id">3118410202</th>
+	                                	<th class="id">
+	                                		3118410202
+	                                	</th>
 	                                	<th>Hà Minh Khôi</th>
 	                                	<th>??-??-2000</th>
 	                                	<th>haminhkhoi@gmail.com</th>
 	                                	<th>Nam</th>
 	                                	<th>Giám đốc</th>
 	                                	<th>
-	                                		<a href="" class="btn btn-success add">
+	                                		<a class="btn btn-success add">
+	                                		<!-- <a href="" class="btn btn-success add"> -->
 	                                			Thêm 
 	                                		</a>
 	                                	</th>
+
 	                                </tr>
 	                            </tbody>
 	                        </table>
 	                    </div>
 					</div>
 					<!-- End of tblDanhSachNhanVien -->
+					<div>
+						3118410179
+						<input value="3118410179" type="checkbox" name="" checked="true">
+					</div>
+					<div>
+						3118410202
+						<input class="3118410202" value="3118410202" type="checkbox" name="" checked="false">
+					</div>
 	            </div>
                 <!-- End of Page Content -->
 
@@ -194,10 +207,16 @@
 
 	<script src="js/jquery/jquery.js"></script>
 	<script>
+		$(document).ready(function(){
+			$("input[value='3118410179'").prop("checked",true);
+			$("input[value='3118410202'").prop("checked",false);
+		});
+		
 		$("#tblDanhSachNhanVienThamGia").on('click', '.delete', function() {
 			$(this).closest('tr').find('.delete').html("Thêm");
 			$(this).closest('tr').find('.delete').toggleClass("delete add btn-danger btn-success");
-			var id = $(this).closest('tr').find('.id').html();
+			var id = $(this).closest('tr').find('.id').html();			
+			$("input[value='"+$.trim(id)+"']").prop("checked",false);
 			var currow = $(this).closest('tr').html();
 	    	$("#tblDanhSachNhanVien").append("<tr>" + currow + "</tr>");
 	    	$(this).closest('tr').remove();
@@ -207,7 +226,8 @@
 			$(this).closest('tr').find('.add').html("Xóa");
 			$(this).closest('tr').find('.add').toggleClass("add delete btn-success btn-danger");
 			var id = $(this).closest('tr').find('.id').html();
-			$(this).closest('a').attr("href",id);
+			$("input[value='"+$.trim(id)+"']").prop("checked",true);
+			// $(this).closest('a').attr("href",id); (Khong duoc xoa dong nay)
 		    var currow = $(this).closest('tr').html();
 		    $("#tblDanhSachNhanVienThamGia").append("<tr>" + currow + "</tr>");
 		    $(this).closest('tr').remove();
