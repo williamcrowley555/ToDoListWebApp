@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+        $("tbody").on('click', '.add', function() {
+       var currow = $(this).closest('tr').clone();
+       currow.find('td:last-child a').html('Remove').toggleClass('add remove');
+       
+       $("tbody").append("<tr>" + currow.html() + "</tr>");
+});
+
+$("tbody").on('click', '.remove', function() {
+       $(this).closest('tr').remove();
+});
+
+    </script>
+
+</head>
+<body>
+    <table id="choose-address-table" class="ui-widget ui-widget-content">
+    <thead>
+        <tr class="ui-widget-header ">
+            <th>Name/Nr.</th>
+            <th>Street</th>
+            <th>Town</th>
+            <th>Postcode</th>
+            <th>Country</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="nr"><span>50</span>
+            </td>
+            <td>Some Street 1</td>
+            <td>Leeds</td>
+            <td>L0 0XX</td>
+            <td>United Kingdom</td>
+            <td>
+                <a href="#" class="add">Add</a>
+            </td>
+        </tr>
+        <tr>
+            <td class="nr">49</td>
+            <td>Some Street 2</td>
+            <td>Lancaster</td>
+            <td>L0 0XX</td>
+            <td>United Kingdom</td>
+            <td>
+                <a href="#" class="add">Add</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -119,14 +119,16 @@
 	                            </thead>
 	                            <tbody class="text-center">
 	                            	<tr>
-	                                	<th>3118410179</th>
+	                                	<th class="id">3118410179</th>
 	                                	<th>Phạm Đức Khải</th>
 	                                	<th>23-06-2000</th>
 	                                	<th>duckhai0623@gmail.com</th>
 	                                	<th>Nam</th>
 	                                	<th>Nhân viên</th>
 	                                	<th>
-	                                		<button class="btn btn-danger btnDelete" id="xoa">Xóa</button>
+	                                		<a href="" class="btn btn-danger delete">
+	                                			Xóa
+	                                		</a>
 	                                	</th>
 	                                </tr>
 	                            </tbody>
@@ -163,16 +165,16 @@
 	                            </thead>
 	                            <tbody class="text-center">
 	                            	<tr>
-	                                	<th id="id">3118410202</th>
-	                                	<th id="hoTen">Hà Minh Khôi</th>
-	                                	<th id="ngaySinh">??-??-2000</th>
-	                                	<th id="email">haminhkhoi@gmail.com</th>
-	                                	<th id="gioitinh">Nam</th>
-	                                	<th id="chucVu">Giám đốc</th>
+	                                	<th class="id">3118410202</th>
+	                                	<th>Hà Minh Khôi</th>
+	                                	<th>??-??-2000</th>
+	                                	<th>haminhkhoi@gmail.com</th>
+	                                	<th>Nam</th>
+	                                	<th>Giám đốc</th>
 	                                	<th>
-	                                		<button type="button" class="btn btn-success btnAdd" id="them">
-	                                			Thêm
-	                                		</button>
+	                                		<a href="" class="btn btn-success add">
+	                                			Thêm 
+	                                		</a>
 	                                	</th>
 	                                </tr>
 	                            </tbody>
@@ -180,7 +182,6 @@
 	                    </div>
 					</div>
 					<!-- End of tblDanhSachNhanVien -->
-
 	            </div>
                 <!-- End of Page Content -->
 
@@ -191,20 +192,25 @@
         <!-- End of Content Wrapper -->
     </div>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="js/jquery/jquery.js"></script>
 	<script>
-		$("#tblDanhSachNhanVien").on('click', '.btnAdd', function() {
-			$(this).closest('tr').find('#them').text("Xóa");
-			// alert($(this).closest('tr').find('#them').html("abc"));
-		    var currow = $(this).closest('tr').html();
-		    $("#tblDanhSachNhanVienThamGia").append("<tr>" + currow + "</tr>");
-		    $(this).closest('tr').remove();
-		});
-
-		$("#tblDanhSachNhanVienThamGia").on('click', '.btnDelete', function() {
+		$("#tblDanhSachNhanVienThamGia").on('click', '.delete', function() {
+			$(this).closest('tr').find('.delete').html("Thêm");
+			$(this).closest('tr').find('.delete').toggleClass("delete add btn-danger btn-success");
+			var id = $(this).closest('tr').find('.id').html();
 			var currow = $(this).closest('tr').html();
 	    	$("#tblDanhSachNhanVien").append("<tr>" + currow + "</tr>");
 	    	$(this).closest('tr').remove();
+		});
+
+		$("#tblDanhSachNhanVien").on('click', '.add', function() {
+			$(this).closest('tr').find('.add').html("Xóa");
+			$(this).closest('tr').find('.add').toggleClass("add delete btn-success btn-danger");
+			var id = $(this).closest('tr').find('.id').html();
+			$(this).closest('a').attr("href",id);
+		    var currow = $(this).closest('tr').html();
+		    $("#tblDanhSachNhanVienThamGia").append("<tr>" + currow + "</tr>");
+		    $(this).closest('tr').remove();
 		});
 	</script>
 </body>
