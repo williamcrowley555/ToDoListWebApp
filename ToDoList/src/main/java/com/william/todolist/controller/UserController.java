@@ -14,6 +14,6 @@ public class UserController {
     public String viewRegisterForm(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-        return "register";
+        return "user_registration_form";
     }
 }

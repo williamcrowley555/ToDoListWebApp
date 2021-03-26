@@ -6,6 +6,7 @@ function init(){
     paginate("#worksTable");
     paginate("#completedTable");
     paginate("#lateTable");
+    paginate("#employeeTable");
 }
 
 function paginate (table) {
