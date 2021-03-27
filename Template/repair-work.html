@@ -92,17 +92,17 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Họ">
+                                            placeholder="Họ" required>
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="Tên">
+                                            placeholder="Tên" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
                                         <label class="mb-2 ml-2">Ngày sinh: </label>
-                                        <input type="date" class="form-control form-control-user" onkeydown="return false">
+                                        <input type="date" class="form-control form-control-user" onkeydown="return false" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -118,19 +118,17 @@
                                 </div>
                                 <div class="form-group">
                                         <input type="email" class="form-control form-control-user" id="exampleInputEmail" 
-                                            aria-describedby="emailHelp" placeholder="Email">
+                                            aria-describedby="emailHelp" placeholder="Email" required>
                                 </div>
                                 <div class="mb-2 ml-2">Chức vụ: </div>
                                 <div class="form-group ml-2">
                                       	<input type="checkbox" id="defaultCheck1" value="Giám đốc">
 										<label for="defaultCheck1">Giám đốc</label><br>
-										<input type="checkbox" id="defaultCheck2" value="Nhân viên">
+										<input type="checkbox" id="defaultCheck2" value="Nhân viên" checked>
 										<label for="defaultCheck2">Nhân viên</label><br>
                                 </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                    Xác nhận
-                                </a>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
+                                <button type="submit" class="btn btn-primary btn btn-primary btn-user btn-block">Xác nhận</button>
+                                <a href="QuanLyCongViec.html" class="btn btn-primary btn-user btn-block">
                                     Về danh sách công việc
                                 </a>
                             </form>
