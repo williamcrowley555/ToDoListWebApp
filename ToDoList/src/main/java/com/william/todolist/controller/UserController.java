@@ -28,7 +28,7 @@ public class UserController {
 
     @GetMapping("/register")
     public String viewRegisterForm(Model model) {
-        User user = userService.getUserById(3L);
+        User user = new User();
         model.addAttribute("user", user);
         return "user_registration_form";
     }
