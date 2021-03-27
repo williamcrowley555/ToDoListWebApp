@@ -88,7 +88,7 @@
                     <div class="text-center">
                         <h1 class="h4 text-gray-900 mb-4">Thêm công việc</h1>
                     </div>
-                    <form class="user">
+                    <form class="user" method="POST">
                         <div class="add-work-text mb-2">Tiêu đề</div>
                         <div class="form-group">
                             <input type="text" class="form-control form-control-user"
@@ -100,11 +100,11 @@
                         <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <div class="add-work-text mb-2">Ngày bắt đầu</div>
-                            <input type="date" class="form-control form-control-user" onkeydown="return false" required>
+                            <input type="date" name="txtStartDate" id="txtStartDate" class="form-control form-control-user" onkeydown="return false" required>
                         </div>
                         <div class="col-sm-6">
                             <div class="add-work-text mb-2">Ngày kết thúc</div>
-                            <input type="date" class="form-control form-control-user" onkeydown="return false" required>
+                            <input type="date" name="txtEndDate" id="txtEndDate" class="form-control form-control-user" onkeydown="return false" required>
                         </div>
                         </div>
                         <!-- End chọn date -->
@@ -127,7 +127,7 @@
                         </div>
 
                         <!-- Nút chuyển trang -->
-                        <button type="submit" class="btn btn-primary btn btn-primary btn-user btn-block">Xác nhận</button>
+                        <button type="submit" class="btn btn-primary btn btn-primary btn-user btn-block" onclick="DateCheck()">Xác nhận</button>
                         <a href="index.html" class="btn btn-primary btn-user btn-block">
                            Về danh sách công việc
                         </a>
@@ -164,7 +164,7 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
-
+<script src="js/date.js"></script>
 </body>
 
 </html>
