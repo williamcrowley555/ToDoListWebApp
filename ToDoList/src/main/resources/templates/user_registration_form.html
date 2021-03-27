@@ -13,64 +13,82 @@
                 <div class="col-lg-5 d-none d-lg-block bg-register-image">
                     <img th:src="@{/img/register.jpg}" class="w-100 h-100" style="object-fit: cover; object-position: center;">
                 </div>
-                    <div class="col-lg-7">
-                        <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Tạo tài khoản mới!</h1>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Tạo tài khoản mới!</h1>
+                        </div>
+                        <div th:if="${param.success}" class="col-sm-12 alert alert-success" role="alert">Đăng ký thành công</div>
+                        <form th:action="@{/users/register}" th:object="${user}" method="POST" class="user">
+                            <input type="hidden" th:field="*{id}">
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                                         class="alert alert-danger" role="alert">Error Message
+                                    </div>
+                                    <input type="text" th:field="*{lastName}" class="form-control form-control-user" id="exampleLastName"
+                                           placeholder="Họ" required>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                                         class="alert alert-danger" role="alert">Error Message
+                                    </div>
+                                    <input type="text" th:field="*{firstName}" class="form-control form-control-user" id="exampleFirstName"
+                                           placeholder="Tên" required>
+                                </div>
                             </div>
-                            <form class="user">
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                               placeholder="Họ">
+                            <div class="form-group row">
+                                <div class="col-sm-12 mb-3 mb-sm-0">
+                                    <div th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}"
+                                         class="alert alert-danger" role="alert">Error Message
                                     </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                               placeholder="Tên">
-                                    </div>
+
+                                    <label class="mb-2 ml-2">Ngày sinh: </label>
+                                    <input type="date" th:field="*{dob}" class="form-control form-control-user" onkeydown="return false" required>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <label class="mb-2 ml-2">Ngày sinh: </label>
-                                        <input type="date" class="form-control form-control-user" onkeydown="return false">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6">
-                                        <div>
-                                            <label class="px-2">Giới tính: </label>
-                                            <input type="radio" id="male" name="gender" value="male" checked>
-                                            <label class="mr-2" for="male">Nam</label>
-                                            <input type="radio" id="female" name="gender" value="female">
-                                            <label for="female">Nữ</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                           aria-describedby="emailHelp" placeholder="Email">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control form-control-user"
-                                           id="exampleInputPassword" placeholder="Mật khẩu">
-                                </div>
-                                <div class="mb-2 ml-2">Chức vụ: </div>
-                                <div class="form-group">
-                                    <select class="form-control">
-                                        <option>Giám đốc</option>
-                                        <option>Nhân viên</option>
-                                    </select>
-                                </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                    Đăng kí tài khoản
-                                </a>
-                            </form>
-                            <hr>
-                            <div class="text-center">
-                                <a class="small" href="login.html">Đã có tài khoản? Đăng nhập tại đây!</a>
                             </div>
+                            <div class="form-group row">
+                                <div th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"
+                                     class="col-sm-12 alert alert-danger" role="alert">Error Message
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div>
+                                        <label class="px-2">Giới tính: </label>
+
+                                        <input type="radio" th:field="*{gender}" th:value="1" id="male">
+                                        <label class="mr-2" for="male">Nam</label>
+
+                                        <input type="radio" th:field="*{gender}" th:value="0" id="female">
+                                        <label for="female">Nữ</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                                     class="alert alert-danger" role="alert">Error Message
+                                </div>
+
+                                <input type="email" th:field="*{email}" class="form-control form-control-user" id="exampleInputEmail"
+                                       aria-describedby="emailHelp" placeholder="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                                     class="alert alert-danger" role="alert">Error Message
+                                </div>
+
+                                <input type="password" th:field="*{password}" class="form-control form-control-user"
+                                       id="exampleInputPassword" placeholder="Mật khẩu" required>
+                            </div>
+                            <input type="submit" value="Đăng kí tài khoản" class="btn btn-primary btn-user btn-block">
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                            <a class="small" th:href="@{/login}">Đã có tài khoản? Đăng nhập tại đây!</a>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>

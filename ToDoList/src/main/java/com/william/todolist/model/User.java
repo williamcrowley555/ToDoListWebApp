@@ -21,39 +21,38 @@ public class User {
     private Long id;
 
     @Column(name = "first_name", nullable = false)
-    @NotBlank
-    @Pattern(regexp = "^[A-Za-z ]+$")
+    @NotBlank(message = "Tên không được để trống")
+    @Pattern(regexp = "^[\\p{L}A-Za-z ]+$", message = "Tên không hợp lệ")
     private String firstName;
 
     @Column(name = "last_name", nullable = false)
-    @NotBlank
-    @Pattern(regexp = "^[A-Za-z]+$")
+    @NotBlank(message = "Họ không được để trống")
+    @Pattern(regexp = "^[\\p{L}A-Za-z]+$", message = "Họ không hợp lệ")
     private String lastName;
 
     @Column(name = "dob", nullable = false)
-    @NotBlank
-    @DateTimeFormat(pattern = "dd/mm/yyyy")
+    @NotNull(message = "Ngày sinh không được để trống")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dob;
 
     @Column(name = "gender", nullable = false)
-    @NotBlank
+    @NotNull(message = "Hãy chọn giới tính")
     @Min(value = 0)
     @Max(value = 5)
-    private Integer gender;
+    private Integer gender = 1;
 
     @Column(name = "email", nullable = false)
-    @NotBlank
-    @Email
+    @NotBlank(message = "Email không được để trống")
+    @Email(message = "Email không hợp lệ")
     private String email;
 
     @Column(name = "password", nullable = false)
     @NotBlank
-    @Size(min = 5, message = "Password must be at least 5 characters")
+    @Size(min = 5, message = "Mật khẩu tối thiểu 5 ký tự")
     private String password;
 
     @Column(name = "enabled", nullable = false, columnDefinition="tinyint(1) default 1")
-    @NotBlank
-    private boolean enabled;
+    private boolean enabled = true;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
@@ -69,7 +68,7 @@ public class User {
         this.id = id;
     }
 
-    public User(@NotBlank @Pattern(regexp = "^[A-Za-z ]+$") String firstName, @NotBlank @Pattern(regexp = "^[A-Za-z]+$") String lastName, @NotBlank Date dob, @NotBlank @Min(value = 0) @Max(value = 5) Integer gender, @NotBlank @Email String email, @NotBlank @Size(min = 5, message = "Password must be at least 5 characters") String password, @Valid Set<Role> roles) {
+    public User(@NotBlank @Pattern(regexp = "^[A-Za-z ]+$") String firstName, @NotBlank @Pattern(regexp = "^[A-Za-z]+$") String lastName, @NotNull Date dob, @NotNull @Min(value = 0) @Max(value = 5) Integer gender, @NotBlank @Email String email, @NotBlank @Size(min = 5, message = "Password must be at least 5 characters") String password, @Valid Set<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dob = dob;
@@ -101,6 +100,22 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public Integer getGender() {
+        return gender;
+    }
+
+    public void setGender(Integer gender) {
+        this.gender = gender;
     }
 
     public String getEmail() {
