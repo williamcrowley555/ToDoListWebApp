@@ -5,6 +5,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -151,6 +153,11 @@ public class User {
 
     public String getFullName() {
         return lastName + " " + firstName;
+    }
+
+    public String getDobDate() {
+        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        return formatter.format(dob);
     }
 
     @Override

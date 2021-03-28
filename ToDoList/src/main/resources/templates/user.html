@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
                 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<head th:replace="fragments/header :: html_head(headTitle = 'Employee Management')"></head>
+<head th:replace="fragments/header :: html_head(headTitle = 'User Management')"></head>
 
 <body id="pageTop">
 
@@ -48,7 +48,7 @@
                             <tr th:each="user : ${userList}">
                                 <th th:text="${user.id}" scope="row"></th>
                                 <th th:text="${user.fullName}" scope="row"></th>
-                                <td th:text="${user.dob}"></td>
+                                <td th:text="${user.dobDate}"></td>
                                 <td th:text="${user.gender == 0 ? 'Nữ' : 'Nam'}"></td>
                                 <td th:text="${user.email}"></td>
                                 <td th:text="${user.roles}"></td>

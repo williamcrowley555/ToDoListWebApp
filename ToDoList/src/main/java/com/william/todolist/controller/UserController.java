@@ -1,22 +1,27 @@
 package com.william.todolist.controller;
 
+import com.william.todolist.helper.Message;
 import com.william.todolist.model.Role;
 import com.william.todolist.model.User;
 import com.william.todolist.service.RoleService;
 import com.william.todolist.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
 @RequestMapping(path = "users")
 public class UserController {
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     @Autowired
     private UserService userService;
@@ -28,17 +33,17 @@ public class UserController {
     public String listUsers(Model model) {
         List<User> userList = userService.getAllUser();
         model.addAttribute("userList", userList);
-        return "employee";
+        return "user";
     }
 
     @GetMapping("/edit/{id}")
-    public String showEditEmployeeForm(Model model, @PathVariable("id") Long id) {
+    public String showEditUserForm(Model model, @PathVariable("id") Long id) {
         User user = userService.getUserById(id);
         List<Role> roleList = roleService.getAllRole();
 
         model.addAttribute("user", user);
         model.addAttribute("roleList", roleList);
-        return "employee_form";
+        return "user_form";
     }
 
     @PostMapping("/save")
@@ -52,7 +57,7 @@ public class UserController {
             List<Role> roleList = roleService.getAllRole();
             model.addAttribute("roleList", roleList);
 
-            return "employee_form";
+            return "user_form";
         }
 
         userService.saveUser(user);
@@ -64,24 +69,4 @@ public class UserController {
         userService.deleteUserById(id);
         return "redirect:/users";
     }
-
-    @GetMapping("/register")
-    public String viewRegisterForm(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        return "user_registration_form";
-    }
-
-    @PostMapping("/register")
-    public String saveUserRegistration(Model model, @Valid @ModelAttribute("user") User user,
-                                       BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "user_registration_form";
-        }
-
-        userService.saveUserRegistration(user);
-        return "redirect:/users/register?success";
-    }
-
-
 }

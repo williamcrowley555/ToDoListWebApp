@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments/header :: html_head(headTitle = 'Profile')"></head>
+
+<body id="pageTop">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div th:replace="fragments/header :: sidebar"></div>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <div th:replace="fragments/header :: topbar"></div>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Profile</h1>
+                </div>
+
+                <table class="table table-borderless">
+                    <tbody>
+                    <tr>
+                        <th>Id:</th>
+                        <td th:text="${currentUser.id}"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Họ và Tên:</th>
+                        <td th:text="${currentUser.fullName}"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Ngày Sinh:</th>
+                        <td th:text="${currentUser.dobDate}"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Giới Tính:</th>
+                        <td th:text="${currentUser.gender == 0 ? 'Nữ' : 'Nam'}"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Email:</th>
+                        <td th:text="${currentUser.email}"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Chức Vụ:</th>
+                        <td th:text="${currentUser.roles}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    <a  data-toggle="collapse" href="#changePwd" role="button" aria-expanded="false" aria-controls="changePwd">
+                        Đổi mật khẩu
+                        <i class="fas fa-caret-down px-2"></i>
+                    </a>
+
+                <div th:classappend="${session.message != null ? 'show' : ''}" class="collapse" id="changePwd">
+
+                    <th:block th:if="${session.message}">
+                        <div th:classappend="${'alert-' + session.message.type}" class="col-sm-12 alert"
+                             th:text="${session.message.content}" role="alert"></div>
+                    </th:block>
+
+                    <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+
+                    <form th:action="@{/change-password}" method="POST">
+                        <div class="form-group">
+                            <label for="oldPassword">Mật khẩu hiện tại:</label>
+                            <input type="password" name="oldPassword" class="form-control" id="oldPassword"
+                                   aria-describedby="passwordHelp" minlength="5" required>
+                            <small id="passwordHelp" class="form-text text-muted">Vui lòng nhập mật khẩu hiện tại vì lý do bảo mật.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">Mật khẩu mới</label>
+                            <input type="password" name="newPassword" class="form-control" id="newPassword" minlength="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="retypePassword">Nhập lại mật khẩu</label>
+                            <input type="password" name="retypePassword" class="form-control" id="retypePassword" minlength="5" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
+                    </form>
+                </div>
+                </p>
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <th:block th:replace="fragments/footer :: footer"></th:block>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xác nhận đăng xuất</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Bạn có chắc muốn đăng xuất không?</div>
+            <div class="modal-footer">
+                <form th:action="@{/logout}" method="POST">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+                    <input type="submit" value="Đăng xuất" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="fragments/script :: scripts"></th:block>
+<th:block th:replace="fragments/script :: extra_scripts"></th:block>
+
+</body>
+</html>
