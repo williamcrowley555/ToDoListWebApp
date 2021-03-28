@@ -47,7 +47,6 @@ public class User {
     private String email;
 
     @Column(name = "password", nullable = false)
-    @NotBlank
     @Size(min = 5, message = "Mật khẩu tối thiểu 5 ký tự")
     private String password;
 
@@ -68,7 +67,7 @@ public class User {
         this.id = id;
     }
 
-    public User(@NotBlank @Pattern(regexp = "^[A-Za-z ]+$") String firstName, @NotBlank @Pattern(regexp = "^[A-Za-z]+$") String lastName, @NotNull Date dob, @NotNull @Min(value = 0) @Max(value = 5) Integer gender, @NotBlank @Email String email, @NotBlank @Size(min = 5, message = "Password must be at least 5 characters") String password, @Valid Set<Role> roles) {
+    public User(@NotBlank @Pattern(regexp = "^[A-Za-z ]+$") String firstName, @NotBlank @Pattern(regexp = "^[A-Za-z]+$") String lastName, @NotNull Date dob, @NotNull @Min(value = 0) @Max(value = 5) Integer gender, @NotBlank @Email String email, @Size(min = 5, message = "Password must be at least 5 characters") String password, @Valid Set<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dob = dob;
@@ -148,6 +147,10 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getFullName() {
+        return lastName + " " + firstName;
     }
 
     @Override

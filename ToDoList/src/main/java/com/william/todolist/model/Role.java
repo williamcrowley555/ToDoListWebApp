@@ -18,7 +18,7 @@ public class Role {
 
     @Column(name = "name", nullable = false)
     @NotBlank
-    @Pattern(regexp = "^[A-Za-z ]+$")
+    @Pattern(regexp = "^[\\p{L}A-Za-z ]+$")
     private String name;
 
     @Column(name = "normalized_name", nullable = false)
@@ -33,7 +33,7 @@ public class Role {
         this.id = id;
     }
 
-    public Role(Long id, @NotBlank @Pattern(regexp = "^[A-Za-z ]+$") String name, @NotBlank @Pattern(regexp = "^[A-Za-z_ ]+$") String normalizedName) {
+    public Role(Long id, @NotBlank @Pattern(regexp = "^[A-Za-z ]+$") String name, @NotBlank @Pattern(regexp = "^[\\p{L}A-Za-z_ ]+$") String normalizedName) {
         this.id = id;
         this.name = name;
         this.normalizedName = normalizedName;
@@ -78,10 +78,6 @@ public class Role {
 
     @Override
     public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", normalizedName='" + normalizedName + '\'' +
-                '}';
+        return name;
     }
 }

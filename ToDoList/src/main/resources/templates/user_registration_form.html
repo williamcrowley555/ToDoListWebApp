@@ -19,7 +19,6 @@
                         </div>
                         <div th:if="${param.success}" class="col-sm-12 alert alert-success" role="alert">Đăng ký thành công</div>
                         <form th:action="@{/users/register}" th:object="${user}" method="POST" class="user">
-                            <input type="hidden" th:field="*{id}">
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
