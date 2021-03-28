@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
                 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<head th:replace="header :: html_head(headTitle = 'Login')"></head>
+<head th:replace="fragments/header :: html_head(headTitle = 'Login')"></head>
 
 <body id="pageTop">
 
@@ -9,7 +9,7 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <div th:replace="header :: sidebar"></div>
+    <div th:replace="fragments/header :: sidebar"></div>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -19,7 +19,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            <div th:replace="header :: topbar"></div>
+            <div th:replace="fragments/header :: topbar"></div>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -191,13 +191,7 @@
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; ToDoList2021</span>
-                </div>
-            </div>
-        </footer>
+        <th:block th:replace="fragments/footer :: footer"></th:block>
         <!-- End of Footer -->
 
     </div>
@@ -233,7 +227,7 @@
     </div>
 </div>
 
-<th:block th:replace="script :: scripts"></th:block>
+<th:block th:replace="fragments/script :: scripts"></th:block>
 
 </body>
 </html>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="header :: html_head(headTitle = 'Registration')"></head>
+<head th:replace="fragments/header :: html_head(headTitle = 'Registration')"></head>
 
 <body class="bg-gradient-primary">
 
@@ -93,7 +93,7 @@
     </div>
 </div>
 
-    <th:block th:replace="script :: scripts"></th:block>
+    <th:block th:replace="fragments/script :: scripts"></th:block>
 
 </body>
 </html>
