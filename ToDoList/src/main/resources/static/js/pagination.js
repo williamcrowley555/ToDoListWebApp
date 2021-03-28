@@ -7,7 +7,7 @@ function init(){
     paginate("#completedTable");
     paginate("#lateTable");
     paginate("#employeeTable");
-
+    $('#example').DataTable();
 }
 
 function paginate (table) {
