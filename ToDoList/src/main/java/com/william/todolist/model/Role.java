@@ -9,7 +9,7 @@ import java.util.Objects;
 @Table(name = "role",
         uniqueConstraints = {
                 @UniqueConstraint(name = "role_name_unique", columnNames = "name"),
-                @UniqueConstraint(name = "role_normalized _name_unique", columnNames = "normalizedName")
+                @UniqueConstraint(name = "role_normalized _name_unique", columnNames = "normalized_name")
         })
 public class Role {
 

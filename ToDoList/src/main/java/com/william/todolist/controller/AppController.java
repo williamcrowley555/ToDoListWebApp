@@ -60,7 +60,7 @@ public class AppController {
         }
 
         userService.saveUserRegistration(user);
-        return "redirect:/users/register?success";
+        return "redirect:/register?success";
     }
 
     @GetMapping("/profile")
