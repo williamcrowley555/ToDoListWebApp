@@ -1,6 +1,5 @@
 package com.william.todolist.controller;
 
-import com.william.todolist.helper.Message;
 import com.william.todolist.model.Role;
 import com.william.todolist.model.User;
 import com.william.todolist.service.RoleService;
@@ -13,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.List;
 
 @Controller

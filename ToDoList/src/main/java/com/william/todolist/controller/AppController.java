@@ -80,9 +80,7 @@ public class AppController {
         User currentUser = userService.getUserByEmail(email);
 
         if (encoder.matches(oldPassword, currentUser.getPassword())) {
-            System.out.println("IN MATCH OLD PASSWORD");
             if (newPassword.equals(retypePassword)) {
-                System.out.println("IN SAVE NEW PASSWORD");
                 String encodedPassword = encoder.encode(newPassword);
                 currentUser.setPassword(encodedPassword);
 
@@ -90,12 +88,10 @@ public class AppController {
                 session.setAttribute("message", new Message("success", "Đổi mật khẩu thành công"));
             }
             else {
-                System.out.println("IN WRONG RETYPE PASSWORD");
                 session.setAttribute("message", new Message("danger", "Mật khẩu mới không trùng khớp"));
             }
         }
         else {
-            System.out.println("IN WRONG OLD PASSWORD");
             session.setAttribute("message", new Message("danger", "Mật khẩu hiện tại không đúng"));
         }
 
