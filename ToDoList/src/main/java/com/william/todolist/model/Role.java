@@ -8,7 +8,8 @@ import java.util.Objects;
 @Entity(name = "Role")
 @Table(name = "role",
         uniqueConstraints = {
-                @UniqueConstraint(name = "role_name_unique", columnNames = "name")
+                @UniqueConstraint(name = "role_name_unique", columnNames = "name"),
+                @UniqueConstraint(name = "role_normalized _name_unique", columnNames = "normalizedName")
         })
 public class Role {
 
