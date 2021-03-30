@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
                 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<head th:replace="fragments/header :: html_head(headTitle = 'User Management')"></head>
+<head th:replace="fragments/header :: html_head(headTitle = 'Task Management')"></head>
 
 <body id="pageTop">
 
@@ -27,36 +27,42 @@
 
                 <!-- Page Heading -->
                 <div class="container-fluid mt-4 mb-4 mr-3">
-                    <h1 class="h3 mb-0 text-gray-800">Quản Lý Nhân Viên</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Quản Lý Công Việc</h1>
+                    <a href="./add-work.html">
+                        <button type="button" class="btn  btn-success mt-4">
+                            <i class="fas fa-plus mr-2"></i> Thêm Công Việc
+                        </button>
+                    </a>
                 </div>
 
                 <div class="container-fluid">
+
                     <!-- Table -->
-                    <table class="table table-fluid" id="employeeTable">
+                    <table class="table table-fluid" id="worksTable">
                         <thead>
-                            <tr>
-                                <th scope="col">Id</th>
-                                <th scope="col">Họ Và Tên</th>
-                                <th scope="col">Ngày Sinh</th>
-                                <th scope="col">Giới Tính</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Chức Vụ</th>
-                                <th scope="col">Thao Tác</th>
-                            </tr>
+                        <tr>
+                            <th scope="col">Tiêu Đề</th>
+                            <th scope="col">Ngày Bắt Đầu</th>
+                            <th scope="col">Ngày kết Thúc</th>
+                            <th scope="col">Phạm Vi</th>
+                            <th scope="col">Trạng Thái Công Việc</th>
+                            <th scope="col">Thao Tác</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="user : ${userList}">
-                                <th th:text="${user.id}" scope="row"></th>
-                                <th th:text="${user.fullName}" scope="row"></th>
-                                <td th:text="${user.dobFormat}"></td>
-                                <td th:text="${user.gender == 0 ? 'Nữ' : 'Nam'}"></td>
-                                <td th:text="${user.email}"></td>
-                                <td th:text="${user.roles}"></td>
-                                <td>
-                                    <a th:href="@{|/users/edit/${user.id}|}" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                                    <a th:href="@{|/users/delete/${user.id}|}" th:onclick="|return confirm('Bạn có chắc muốn xóa người dùng có ID: ${user.id}?')|" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <th scope="row">Soạn Tài Liệu</th>
+                            <td>21/04/2021</td>
+                            <td>29/04/2021</td>
+                            <td>Public</td>
+                            <td>Đang Thực Hiện</td>
+                            <td>
+                                <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                <button type="button" class="btn btn-success"><i class="fas fa-check"></i></button>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

@@ -1,5 +1,7 @@
 package com.william.todolist.model;
 
+import com.william.todolist.validation.Age;
+import com.william.todolist.validation.UniqueEmail;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -7,6 +9,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +20,7 @@ import java.util.Set;
         uniqueConstraints = {
                         @UniqueConstraint(name = "user_email_unique", columnNames = "email")
         })
+@UniqueEmail
 public class User {
 
     @Id
@@ -35,7 +40,8 @@ public class User {
     @Column(name = "dob", nullable = false)
     @NotNull(message = "Ngày sinh không được để trống")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dob;
+    @Age
+    private LocalDate dob;
 
     @Column(name = "gender", nullable = false)
     @NotNull(message = "Hãy chọn giới tính")
@@ -69,7 +75,7 @@ public class User {
         this.id = id;
     }
 
-    public User(@NotBlank @Pattern(regexp = "^[A-Za-z ]+$") String firstName, @NotBlank @Pattern(regexp = "^[A-Za-z]+$") String lastName, @NotNull Date dob, @NotNull @Min(value = 0) @Max(value = 5) Integer gender, @NotBlank @Email String email, @Size(min = 5, message = "Password must be at least 5 characters") String password, @Valid Set<Role> roles) {
+    public User(@NotBlank(message = "Tên không được để trống") @Pattern(regexp = "^[\\p{L}A-Za-z ]+$", message = "Tên không hợp lệ") String firstName, @NotBlank(message = "Họ không được để trống") @Pattern(regexp = "^[\\p{L}A-Za-z]+$", message = "Họ không hợp lệ") String lastName, @NotNull(message = "Ngày sinh không được để trống") @Age LocalDate dob, @NotNull(message = "Hãy chọn giới tính") @Min(value = 0) @Max(value = 5) Integer gender, @NotBlank(message = "Email không được để trống") @Email(message = "Email không hợp lệ") String email, @Size(min = 5, message = "Mật khẩu tối thiểu 5 ký tự") String password, @Valid Set<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dob = dob;
@@ -103,11 +109,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Date getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 
@@ -155,9 +161,9 @@ public class User {
         return lastName + " " + firstName;
     }
 
-    public String getDobDate() {
-        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        return formatter.format(dob);
+    public String getDobFormat() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return dob.format(formatter);
     }
 
     @Override

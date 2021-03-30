@@ -1,5 +1,6 @@
 package com.william.todolist.model;
 
+import com.william.todolist.validation.DateRange;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.util.Date;
 
 @Entity(name = "Task")
 @Table(name = "task")
+@DateRange
 public class Task {
 
     @Id
