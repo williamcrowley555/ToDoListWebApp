@@ -6,6 +6,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,15 +37,14 @@ public class Task {
 
     @Column(name = "sector", nullable = false)
     @NotNull(message = "Hãy chọn phạm vi")
-    @Min(value = 0)
+    @Min(value = 1)
     @Max(value = 5)
     private Integer sector;
 
     @Column(name = "status", nullable = false)
-    @NotNull(message = "Hãy chọn trạng thái")
-    @Min(value = 0)
+    @Min(value = 1)
     @Max(value = 5)
-    private Integer status;
+    private Integer status = 1;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -74,28 +75,64 @@ public class Task {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Date getStartDate() {
         return startDate;
     }
 
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
     public Date getEndDate() {
         return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public Integer getSector() {
         return sector;
     }
 
+    public void setSector(Integer sector) {
+        this.sector = sector;
+    }
+
     public Integer getStatus() {
         return status;
     }
 
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public User getUser() {
         return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Set<User> getParticipatedUsers() {
+        return participatedUsers;
+    }
+
+    public void setParticipatedUsers(Set<User> participatedUsers) {
+        this.participatedUsers = participatedUsers;
     }
 
     public void addParticipatedUser(User user) {
@@ -104,6 +141,16 @@ public class Task {
 
     public void removeParticipated(User user) {
         this.participatedUsers.remove(user);
+    }
+
+    public String startDateFormat() {
+        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        return formatter.format(startDate);
+    }
+
+    public String endDateFormat() {
+        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        return formatter.format(endDate);
     }
 
     @Override

@@ -29,9 +29,9 @@
                 <div class="container-fluid mt-4 mb-4 mr-3">
                     <h1 class="h3 mb-0 text-gray-800">Quản Lý Công Việc</h1>
                     <a href="./add-work.html">
-                        <button type="button" class="btn  btn-success mt-4">
+                        <a th:href="@{/tasks/add}" class="btn  btn-success mt-4">
                             <i class="fas fa-plus mr-2"></i> Thêm Công Việc
-                        </button>
+                        </a>
                     </a>
                 </div>
 
@@ -40,29 +40,41 @@
                     <!-- Table -->
                     <table class="table table-fluid" id="worksTable">
                         <thead>
-                        <tr>
-                            <th scope="col">Tiêu Đề</th>
-                            <th scope="col">Ngày Bắt Đầu</th>
-                            <th scope="col">Ngày kết Thúc</th>
-                            <th scope="col">Phạm Vi</th>
-                            <th scope="col">Trạng Thái Công Việc</th>
-                            <th scope="col">Thao Tác</th>
-                        </tr>
+                            <tr>
+                                <th scope="col">Tiêu Đề</th>
+                                <th scope="col">Ngày Bắt Đầu</th>
+                                <th scope="col">Ngày kết Thúc</th>
+                                <th scope="col">Phạm Vi</th>
+                                <th scope="col">Trạng Thái Công Việc</th>
+                                <th scope="col">Thao Tác</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row">Soạn Tài Liệu</th>
-                            <td>21/04/2021</td>
-                            <td>29/04/2021</td>
-                            <td>Public</td>
-                            <td>Đang Thực Hiện</td>
-                            <td>
-                                <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                                <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                                <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                                <button type="button" class="btn btn-success"><i class="fas fa-check"></i></button>
-                            </td>
-                        </tr>
+                            <th:block th:each="task : ${taskList}">
+                                <tr th:if="${task.user != null && task.user.id == currentUser.id}">
+                                    <th th:text="${task.title}" scope="row"></th>
+                                    <td th:text="${task.startDateFormat}"></td>
+                                    <td th:text="${task.endDateFormat}"></td>
+                                    <td th:text="${task.sector == 1 ? 'Public' : 'Private'}"></td>
+                                    <th:block th:switch="${task.status}">
+                                        <td th:case="1">Đang thực hiện</td>
+                                        <td th:case="2">Hoàn thành</td>
+                                        <td th:case="3">Trễ hạn</td>
+                                    </th:block >
+                                    <td>
+                                        <a class="btn btn-primary"><i class="far fa-eye"></i></a>
+                                        <a th:href="@{|/tasks/edit/${task.id}|}" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                        <a th:href="@{|/tasks/delete/${task.id}|}" th:onclick="|return confirm('Bạn có chắc muốn xóa công việc này?')|"
+                                           class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                                        <th:block th:if="${task.status == 2}">
+                                            <a th:href="@{|/tasks/incomplete/${task.id}|}" class="btn btn-danger"><i class="fas fa-times"></i></a>
+                                        </th:block>
+                                        <th:block th:unless="${task.status == 2}">
+                                            <a th:href="@{|/tasks/complete/${task.id}|}" class="btn btn-success"><i class="fas fa-check"></i></a>
+                                        </th:block>
+                                    </td>
+                                </tr>
+                            </th:block>
                         </tbody>
                     </table>
                 </div>

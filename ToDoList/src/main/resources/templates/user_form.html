@@ -24,7 +24,6 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-
                 <div class="add-work-form">
                     <!-- Page Heading -->
                     <div class="text-center">
@@ -33,7 +32,6 @@
 
                     <!-- User Form -->
                     <form th:action="@{/users/save}" th:object="${user}" method="POST" class="user">
-
                         <input type="hidden" th:field="*{id}">
                         <input type="hidden" th:field="*{email}">
                         <div class="form-group row">

@@ -69,7 +69,7 @@ public class UserController {
     }
 
     @GetMapping("/delete/{id}")
-    public String viewRegisterForm(@PathVariable("id") Long id) {
+    public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
         return "redirect:/users";
     }
