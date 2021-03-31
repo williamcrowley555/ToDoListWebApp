@@ -7,6 +7,8 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "Task")
 @Table(name = "task")
@@ -48,6 +50,14 @@ public class Task {
     @Valid
     private User user;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "task_user",
+            joinColumns = @JoinColumn(name = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    @Valid
+    private Set<User> participatedUsers = new HashSet<>();
+
     public Task() {
     }
 
@@ -86,5 +96,27 @@ public class Task {
 
     public User getUser() {
         return user;
+    }
+
+    public void addParticipatedUser(User user) {
+        this.participatedUsers.add(user);
+    }
+
+    public void removeParticipated(User user) {
+        this.participatedUsers.remove(user);
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", sector=" + sector +
+                ", status=" + status +
+                ", user=" + user +
+                ", participatedUsers=" + participatedUsers +
+                '}';
     }
 }

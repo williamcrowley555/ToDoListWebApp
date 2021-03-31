@@ -44,7 +44,7 @@
 
                     <tr>
                         <th>Ngày Sinh:</th>
-                        <td th:text="${currentUser.dobDate}"></td>
+                        <td th:text="${currentUser.dobFormat}"></td>
                     </tr>
 
                     <tr>
@@ -83,7 +83,7 @@
                         <div class="form-group">
                             <label for="oldPassword">Mật khẩu hiện tại:</label>
                             <input type="password" name="oldPassword" class="form-control" id="oldPassword"
-                                   aria-describedby="passwordHelp" minlength="5" required>
+                                   aria-describedby="passwordHelp" required>
                             <small id="passwordHelp" class="form-text text-muted">Vui lòng nhập mật khẩu hiện tại vì lý do bảo mật.</small>
                         </div>
                         <div class="form-group">
@@ -92,7 +92,7 @@
                         </div>
                         <div class="form-group">
                             <label for="retypePassword">Nhập lại mật khẩu</label>
-                            <input type="password" name="retypePassword" class="form-control" id="retypePassword" minlength="5" required>
+                            <input type="password" name="retypePassword" class="form-control" id="retypePassword" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
                     </form>

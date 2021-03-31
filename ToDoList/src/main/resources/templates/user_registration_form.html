@@ -20,7 +20,7 @@
 
                         <div th:if="${param.success}" class="col-sm-12 alert alert-success" role="alert">Đăng ký thành công</div>
                         <form th:action="@{/register}" th:object="${user}" method="POST" class="user">
-                            <div th:if="${#fields.hasErrors('*')}" th:errors="*"
+                            <div th:if="${uniqueEmailError != null}" th:text="${uniqueEmailError}"
                                  class="alert alert-danger" role="alert">Error Message
                             </div>
 

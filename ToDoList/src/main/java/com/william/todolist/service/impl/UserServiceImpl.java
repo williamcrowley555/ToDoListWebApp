@@ -3,11 +3,8 @@ package com.william.todolist.service.impl;
 import com.william.todolist.model.Role;
 import com.william.todolist.model.User;
 import com.william.todolist.repository.UserRepository;
-import com.william.todolist.security.CustomUserDetails;
 import com.william.todolist.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -45,11 +42,11 @@ public class UserServiceImpl implements UserService {
     public User getUserByEmail(String email) {
         User user = null;
         Optional<User> optional = userRepository.getUserByEmail(email);
+
         if (optional.isPresent()) {
             user = optional.get();
-        } else {
-            throw new RuntimeException("Email: " + email + " does not exist");
         }
+
         return user;
     }
 

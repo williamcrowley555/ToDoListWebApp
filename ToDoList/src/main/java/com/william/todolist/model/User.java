@@ -1,18 +1,15 @@
 package com.william.todolist.model;
 
 import com.william.todolist.validation.Age;
-import com.william.todolist.validation.UniqueEmail;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity(name = "User")
@@ -20,7 +17,6 @@ import java.util.Set;
         uniqueConstraints = {
                         @UniqueConstraint(name = "user_email_unique", columnNames = "email")
         })
-@UniqueEmail
 public class User {
 
     @Id
@@ -164,6 +160,19 @@ public class User {
     public String getDobFormat() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return dob.format(formatter);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id.equals(user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

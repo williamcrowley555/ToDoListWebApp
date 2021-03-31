@@ -2,9 +2,14 @@ package com.william.todolist.controller;
 
 import com.william.todolist.model.Role;
 import com.william.todolist.model.User;
+import com.william.todolist.security.CustomUserDetails;
 import com.william.todolist.service.RoleService;
 import com.william.todolist.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,11 +52,29 @@ public class UserController {
     @PostMapping("/save")
     public String saveUser(Model model, @Valid @ModelAttribute("user") User user,
                                        BindingResult bindingResult) {
-        User currentUser = userService.getUserById(user.getId());
-        user.setPassword(currentUser.getPassword());
+        User existingUser = userService.getUserByEmail(user.getEmail());
+
+        if (user.getId() != null) {
+            User currentUser = userService.getUserById(user.getId());
+            user.setPassword(currentUser.getPassword());
+
+            if (existingUser != null && user.getId() != existingUser.getId()) {
+                List<Role> roleList = roleService.getAllRole();
+                model.addAttribute("roleList", roleList);
+                model.addAttribute("uniqueEmailError", "Email đã được sử dụng");
+
+                return "user_form";
+            }
+        } else {
+            if (existingUser != null) {
+                List<Role> roleList = roleService.getAllRole();
+                model.addAttribute("roleList", roleList);
+
+                return "user_form";
+            }
+        }
 
         if (bindingResult.hasErrors()) {
-            bindingResult.getAllErrors().forEach(System.out::println);
             List<Role> roleList = roleService.getAllRole();
             model.addAttribute("roleList", roleList);
 
@@ -59,6 +82,8 @@ public class UserController {
         }
 
         userService.saveUser(user);
+        reloadAuthentication(user);
+
         return "redirect:/users";
     }
 
@@ -66,5 +91,11 @@ public class UserController {
     public String viewRegisterForm(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
         return "redirect:/users";
+    }
+
+    public void reloadAuthentication(User user) {
+        UserDetails userDetails = new CustomUserDetails(user);
+        Authentication newAuth = new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(newAuth);
     }
 }

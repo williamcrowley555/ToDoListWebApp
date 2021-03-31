@@ -33,6 +33,10 @@
 
                     <!-- Employee Form -->
                     <form th:action="@{/users/save}" th:object="${user}" method="POST" class="user">
+                        <div th:if="${uniqueEmailError != null}" th:text="${uniqueEmailError}"
+                             class="alert alert-danger" role="alert">Error Message
+                        </div>
+
                         <input type="hidden" th:field="*{id}">
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">

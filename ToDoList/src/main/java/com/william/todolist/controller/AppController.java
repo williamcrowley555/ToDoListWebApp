@@ -55,6 +55,13 @@ public class AppController {
     @PostMapping("/register")
     public String saveUserRegistration(Model model, @Valid @ModelAttribute("user") User user,
                                        BindingResult bindingResult) {
+        User existingUser = userService.getUserByEmail(user.getEmail());
+
+        if (existingUser != null) {
+            model.addAttribute("uniqueEmailError", "Email đã được sử dụng");
+            return "user_registration_form";
+        }
+
         if (bindingResult.hasErrors()) {
             return "user_registration_form";
         }
