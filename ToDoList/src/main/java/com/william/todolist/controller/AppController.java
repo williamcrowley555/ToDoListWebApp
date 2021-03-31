@@ -1,24 +1,27 @@
 package com.william.todolist.controller;
 
 import com.william.todolist.helper.Message;
+import com.william.todolist.model.Role;
 import com.william.todolist.model.User;
+import com.william.todolist.security.CustomUserDetails;
+import com.william.todolist.service.RoleService;
 import com.william.todolist.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class AppController {
@@ -28,6 +31,9 @@ public class AppController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RoleService roleService;
 
     @GetMapping("")
     public String viewHomePage() {
@@ -78,6 +84,55 @@ public class AppController {
         return "user_profile";
     }
 
+    @GetMapping("/edit-profile")
+    public String showEditUserForm(Model model, Principal principal) {
+        User user = userService.getUserByEmail(principal.getName());
+        List<Role> roleList = roleService.getAllRole();
+
+        model.addAttribute("user", user);
+        model.addAttribute("roleList", roleList);
+        return "user_profile_form";
+    }
+
+    @PostMapping("/save-profile")
+    public String saveProfile(Model model, @Valid @ModelAttribute("user") User user,
+                           BindingResult bindingResult) {
+        User existingUser = userService.getUserByEmail(user.getEmail());
+
+        if (user.getId() != null) {
+            User currentUser = userService.getUserById(user.getId());
+            user.setRoles(currentUser.getRoles());
+            user.setPassword(currentUser.getPassword());
+
+            if (existingUser != null && user.getId() != existingUser.getId()) {
+                List<Role> roleList = roleService.getAllRole();
+                model.addAttribute("roleList", roleList);
+                model.addAttribute("uniqueEmailError", "Email đã được sử dụng");
+
+                return "user_profile_form";
+            }
+        } else {
+            if (existingUser != null) {
+                List<Role> roleList = roleService.getAllRole();
+                model.addAttribute("roleList", roleList);
+
+                return "user_profile_form";
+            }
+        }
+
+        if (bindingResult.hasErrors()) {
+            List<Role> roleList = roleService.getAllRole();
+            model.addAttribute("roleList", roleList);
+
+            return "user_profile_form";
+        }
+
+        userService.saveUser(user);
+        reloadAuthentication(user);
+
+        return "redirect:/profile";
+    }
+
     @PostMapping("/change-password")
     public String changePassword(Model model, @RequestParam("oldPassword") String oldPassword,
                                  @RequestParam("newPassword") String newPassword,
@@ -108,5 +163,11 @@ public class AppController {
     @GetMapping("/403")
     public String error403() {
         return "403";
+    }
+
+    public void reloadAuthentication(User user) {
+        UserDetails userDetails = new CustomUserDetails(user);
+        Authentication newAuth = new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(newAuth);
     }
 }

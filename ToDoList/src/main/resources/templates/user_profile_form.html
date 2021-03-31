@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
                 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<head th:replace="fragments/header :: html_head(headTitle = 'User Form')"></head>
+<head th:replace="fragments/header :: html_head(headTitle = 'User Profile Form')"></head>
 
 <body id="pageTop">
 
@@ -28,14 +28,16 @@
                 <div class="add-work-form">
                     <!-- Page Heading -->
                     <div class="text-center">
-                        <h1 th:text="${user.id == null ? 'Thêm người dùng mới' : 'Sửa thông tin người dùng'}" class="h4 text-gray-900 mb-4"></h1>
+                        <h1 class="h4 text-gray-900 mb-4">Sửa hồ sơ</h1>
                     </div>
 
                     <!-- User Form -->
-                    <form th:action="@{/users/save}" th:object="${user}" method="POST" class="user">
+                    <form th:action="@{/save-profile}" th:object="${user}" method="POST" class="user">
+                        <div th:if="${uniqueEmailError != null}" th:text="${uniqueEmailError}"
+                             class="alert alert-danger" role="alert">Error Message
+                        </div>
 
                         <input type="hidden" th:field="*{id}">
-                        <input type="hidden" th:field="*{email}">
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
@@ -81,20 +83,20 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"
+                            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
                                  class="alert alert-danger" role="alert">Error Message
                             </div>
 
-                            <label class="mb-2 ml-2">Chức vụ: </label>
-                            <div th:each="role : ${roleList}" class="form-check mx-2">
-                                <label>
-                                    <input type="checkbox" th:field="*{roles}" th:value="${role.id}" th:text="${role.name}"
-                                       class="form-check-input form-control-user">
-                                </label>
+                            <input type="email" th:field="*{email}" class="form-control form-control-user" id="exampleInputEmail"
+                                   aria-describedby="emailHelp" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"
+                                 class="alert alert-danger" role="alert">Error Message
                             </div>
                         </div>
                         <input type="submit" value="Lưu" class="btn btn-primary btn btn-primary btn-user btn-block">
-                        <a th:href="@{/users}" class="btn btn-primary btn-user btn-block">Về quản lý người dùng</a>
+                        <a th:href="@{/profile}" class="btn btn-primary btn-user btn-block">Về hồ sơ</a>
                     </form>
                 </div>
             </div>
