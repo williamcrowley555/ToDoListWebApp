@@ -18,9 +18,11 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/ChiTietCongViec.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
 
 </head>
 <body>
@@ -141,7 +143,7 @@
 				                   				<th> Phạm Đức Khải </th>
 				                   			</tr>
                                             <tr>
-                                                <th class="text-gray-900"> Thêm File </th>
+                                                <th class="text-gray-900"> Tài liệu </th>
                                                 <th>
                                                     <div class="input-group mb-3">
                                                         <div class="input-group-prepend"></div>
@@ -166,18 +168,53 @@
 			            	<div class="card">
 				            	<div class="card-body">
 				            		<div class="text-center">
-						            	<button type="button" class="btn btn-success"> 
+						            	<button type="button" class="btn btn-success" id="buttonBinhLuan"> 
 						            		Bình luận
 						            	</button>
-						            	<button type="button" class="btn btn-danger"> 
+						            	<button type="button" class="btn btn-danger" id="buttonNhacNho"> 
 						            		Nhắc nhở
 						            	</button>
 		                            </div>
                                     <div class="my-4">
-                                        <input type="text" class="form-control form-rounded" placeholder="Nhập bình luận">
+                                        <input type="text" class="form-control form-rounded" placeholder="Nhập bình luận" id="binhLuan">
+                                    </div>
+                                    <div class="my-4">
+                                        <input type="text" class="form-control form-rounded" placeholder="Nhập nhắc nhở" id="nhacNho">
+                                    </div>
+                                    <div>
+                                    	
                                     </div>
 	                            </div>
 	                        </div>
+	                        <div class="my-4"></div>
+	                        <!-- Comments Table -->
+	                        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+								<table class="table table-bordered table-striped mb-0" id="tblBangBinhLuan">
+    								<thead class="text-center">
+      									<tr>
+        									<th>Bảng bình luận</th>
+      									</tr>
+    								</thead>
+									<tbody>
+										<tr>
+									        <td>Hà Minh Khôi: Cần chỉnh sửa bố cục trang</td>
+									    </tr>
+									</tbody>
+								</table>
+								<table class="table table-bordered table-striped mb-0" id="tblBangNhacNho">
+    								<thead class="text-center">
+      									<tr>
+        									<th>Bảng nhắc nhở</th>
+      									</tr>
+    								</thead>
+									<tbody>
+										<tr>
+									        <td>Bùi Quang Huy: Làm lẹ hoặc bị đuổi khỏi nhóm</td>
+									    </tr>
+									</tbody>
+								</table>
+							</div>
+	                        <!-- End of Comments Table -->
 			            </div>
 			            <!-- End of Right Contain -->
 
@@ -193,6 +230,52 @@
         </div>
         <!-- End of Content Wrapper -->
     </div>
+
+	<!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/jquery/jquery.js"></script>
+    <script>
+    	$(document).ready(function(){
+    		$("#binhLuan").show();
+    		$("#tblBangBinhLuan").show();
+    		$("#nhacNho").hide();
+    		$("#tblBangNhacNho").hide();
+    	});
+    	$("#buttonBinhLuan").on("click",function(){
+    		$("#binhLuan").show();
+    		$("#tblBangBinhLuan").show();
+    		$("#nhacNho").hide();
+    		$("#tblBangNhacNho").hide();
+    	});
+    	$("#buttonNhacNho").on("click", function(){
+    		$("#binhLuan").hide();
+    		$("#tblBangBinhLuan").hide();
+    		$("#nhacNho").show();
+    		$("#tblBangNhacNho").show();
+    	});
+    	$("#binhLuan").on("keydown", function(e){
+    		if(e.which==13)
+    		{
+    			var binhLuan = document.getElementById("binhLuan").value;
+    			$("#tblBangBinhLuan").append("<tr> <td> Phạm Đức Khải: "+ binhLuan +"</td> </tr>");
+    		}
+    	});
+    	$("#nhacNho").on("keydown", function(e){
+    		if(e.which==13)
+    		{
+    			var nhacNho = document.getElementById("nhacNho").value;
+    			$("#tblBangNhacNho").append("<tr> <td> Phạm Đức Khải: "+ nhacNho +"</td> </tr>");
+    		}
+    	});
+    </script>
 
 </body>
 </html>

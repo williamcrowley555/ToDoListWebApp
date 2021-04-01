@@ -2,57 +2,59 @@
 <html>
 <head>
     <title></title>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-        $("tbody").on('click', '.add', function() {
-       var currow = $(this).closest('tr').clone();
-       currow.find('td:last-child a').html('Remove').toggleClass('add remove');
-       
-       $("tbody").append("<tr>" + currow.html() + "</tr>");
-});
-
-$("tbody").on('click', '.remove', function() {
-       $(this).closest('tr').remove();
-});
-
-    </script>
-
 </head>
 <body>
-    <table id="choose-address-table" class="ui-widget ui-widget-content">
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+  <table class="table table-bordered table-striped mb-0">
     <thead>
-        <tr class="ui-widget-header ">
-            <th>Name/Nr.</th>
-            <th>Street</th>
-            <th>Town</th>
-            <th>Postcode</th>
-            <th>Country</th>
-            <th>Options</th>
-        </tr>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+      </tr>
     </thead>
     <tbody>
-        <tr>
-            <td class="nr"><span>50</span>
-            </td>
-            <td>Some Street 1</td>
-            <td>Leeds</td>
-            <td>L0 0XX</td>
-            <td>United Kingdom</td>
-            <td>
-                <a href="#" class="add">Add</a>
-            </td>
-        </tr>
-        <tr>
-            <td class="nr">49</td>
-            <td>Some Street 2</td>
-            <td>Lancaster</td>
-            <td>L0 0XX</td>
-            <td>United Kingdom</td>
-            <td>
-                <a href="#" class="add">Add</a>
-            </td>
-        </tr>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+      </tr>
+      <tr>
+        <th scope="row">4</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <th scope="row">5</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <th scope="row">6</th>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+      </tr>
     </tbody>
-</table>
+  </table>
+
+</div>
 </body>
 </html>
