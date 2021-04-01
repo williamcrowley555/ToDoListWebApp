@@ -114,4 +114,28 @@ public class TaskController {
         return "redirect:/tasks";
     }
 
+    @GetMapping("/add-participated-user")
+    public String addParticipateUser(@RequestParam("taskId") Long taskId,
+                                     @RequestParam("userId") Long userId) {
+        Task task = taskService.getTaskById(taskId);
+        User user = userService.getUserById(userId);
+
+        task.addParticipatedUser(user);
+        taskService.saveTask(task);
+
+        return "redirect:/tasks/invite-users/" + taskId;
+    }
+
+    @GetMapping("/remove-participated-user")
+    public String removeParticipateUser(@RequestParam("taskId") Long taskId,
+                                     @RequestParam("userId") Long userId) {
+        Task task = taskService.getTaskById(taskId);
+        User user = userService.getUserById(userId);
+
+        task.removeParticipatedUser(user);
+        taskService.saveTask(task);
+
+        return "redirect:/tasks/invite-users/" + taskId;
+    }
+
 }

@@ -61,7 +61,7 @@
                                     <td th:text="${user.email}"></td>
                                     <td th:text="${user.roles}"></td></td>
                                     <td>
-                                        <a th:href="@{|/task/remove-participated-user?taskId=${task.id}&userId=${user.id}|}" class="btn btn-danger">Xóa</a>
+                                        <a th:href="@{|/tasks/remove-participated-user?taskId=${task.id}&userId=${user.id}|}" class="btn btn-danger">Xóa</a>
                                     </td>
                                 </tr>
                             </th:block>
@@ -101,7 +101,7 @@
                                 <td th:text="${user.email}"></td>
                                 <td th:text="${user.roles}"></td></td>
                                 <td>
-                                    <a th:href="@{|/task/add-participated-user?taskId=${task.id}&userId=${user.id}|}" class="btn btn-danger">Thêm</a>
+                                    <a th:href="@{|/tasks/add-participated-user?taskId=${task.id}&userId=${user.id}|}" class="btn btn-success">Thêm</a>
                                 </td>
                             </tr>
                         </th:block>
@@ -111,7 +111,9 @@
                 <!-- End of tblDanhSachNhanVien -->
             </div>
             <!-- /.container-fluid -->
-
+            <div class="px-4 py-3 text-right">
+                <a th:href="@{/tasks}" class="btn btn-primary">Hoàn tất</a>
+            </div>
         </div>
         <!-- End of Main Content -->
 
@@ -126,7 +128,7 @@
 <!-- End of Page Wrapper -->
 
 <!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
+<a class="scroll-to-top rounded" href="#pageTop">
     <i class="fas fa-angle-up"></i>
 </a>
 

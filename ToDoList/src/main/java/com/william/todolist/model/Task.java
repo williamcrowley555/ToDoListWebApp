@@ -139,7 +139,7 @@ public class Task {
         this.participatedUsers.add(user);
     }
 
-    public void removeParticipated(User user) {
+    public void removeParticipatedUser(User user) {
         this.participatedUsers.remove(user);
     }
 

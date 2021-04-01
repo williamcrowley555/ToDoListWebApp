@@ -22,10 +22,18 @@ public class TaskServiceTest {
     private UserService userService;
 
     @Test
-    public void testAssignExistingUserToTask() {
+    public void testAssignExistingUserToExistingTask() {
         Task task = taskService.getTaskById(1L);
         User user = userService.getUserById(2L);
         task.addParticipatedUser(user);
+        taskService.saveTask(task);
+    }
+
+    @Test
+    public void testRemoveUserFromExistingTask() {
+        Task task = taskService.getTaskById(1L);
+        User user = userService.getUserById(2L);
+        task.removeParticipatedUser(user);
         taskService.saveTask(task);
     }
 }

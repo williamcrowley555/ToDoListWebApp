@@ -52,8 +52,11 @@ public class UserServiceImpl implements UserService {
         List<User> participatedUsers = this.getAllParticipatedUsersByTaskId(taskId);
         List<Long> ids = participatedUsers.stream().map(item -> item.getId()).collect(Collectors.toList());
         unparticipatedUsers = userRepository.findAllNotIn(ids);
-        System.out.println("UNPARTICIPATED:");
-        unparticipatedUsers.forEach(System.out::println);
+
+        if (unparticipatedUsers.isEmpty()) {
+            unparticipatedUsers = userRepository.findAll();
+        }
+
         return unparticipatedUsers;
     }
 
