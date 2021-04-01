@@ -3,234 +3,205 @@
 <head>
 
 	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
 	<title>Test template</title>
 
 	<!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
 
-    <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+	<!-- Custom styles for this template-->
+	<link href="css/sb-admin-2.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+	<!-- Custom styles for this page -->
+	<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 <body>
 
 	<div id="wrapper">
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+		<!-- Sidebar -->
+		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon">
-                    <i class="fas fa-calendar"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">Admin</div>
-            </a>
+			<!-- Sidebar - Brand -->
+			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+				<div class="sidebar-brand-icon">
+					<i class="fas fa-calendar"></i>
+				</div>
+				<div class="sidebar-brand-text mx-3">Admin</div>
+			</a>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+			<!-- Divider -->
+			<hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
+			<!-- Nav Item - Dashboard -->
+			<li class="nav-item active">
+				<a class="nav-link" href="index.html">
+					<i class="fas fa-fw fa-tachometer-alt"></i>
+					<span>Dashboard</span></a>
+				</li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+				<!-- Divider -->
+				<hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                QUẢN LÝ
-            </div>
+				<!-- Heading -->
+				<div class="sidebar-heading">
+					QUẢN LÝ
+				</div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link" href="./QuanLyCongViec.html">
-                     
-                    <span>QUẢN LÝ CÔNG VIỆC</span></a>
-            </li>
+				<!-- Nav Item - Pages Collapse Menu -->
+				<li class="nav-item">
+					<a class="nav-link" href="./QuanLyCongViec.html">
 
-            <li class="nav-item">
-                <a class="nav-link" href="./QuanLyNhanVien.html">                
-                    <span>QUẢN LÝ PHÂN CÔNG</span></a>
-            </li>
+						<span>QUẢN LÝ CÔNG VIỆC</span></a>
+					</li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+					<li class="nav-item">
+						<a class="nav-link" href="./QuanLyNhanVien.html">                
+							<span>QUẢN LÝ PHÂN CÔNG</span></a>
+						</li>
 
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+						<!-- Divider -->
+						<hr class="sidebar-divider">
 
-        </ul>
-        <!-- End of Sidebar -->
+						<!-- Sidebar Toggler (Sidebar) -->
+						<div class="text-center d-none d-md-inline">
+							<button class="rounded-circle border-0" id="sidebarToggle"></button>
+						</div>
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+					</ul>
+					<!-- End of Sidebar -->
 
-            <!-- Main Content -->
-            <div id="content">
+					<!-- Content Wrapper -->
+					<div id="content-wrapper" class="d-flex flex-column">
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-	                <!-- Page Heading -->
-	                <div class="my-4"></div>
-	                <div class="text-center">
-	                	<h1 class="h1 text-gray-900"> Thêm nhân viên vào công việc </h1>
-	                </div>
-	                <div class="my-4"></div>
+						<!-- Main Content -->
+						<div id="content">
 
-					<div class="">
-                        <span class="iwt text-gray-900">
-                        	<i class="fas fa-list"></i>
-                        	<span class="h5 font-weight-bold">
-								Bảng danh sách nhân viên tham gia
-							</span>
-						</span>
-                    </div>
-                    <!-- tblDanhSachNhanVienThamGia -->
-					<div class="card shadow mb-4">						
-						<div class="table-responsive">
-	                        <table class="table table-bordered" id="tblDanhSachNhanVienThamGia" width="100%" cellspacing="0">
-	                            <thead class="text-center thead-dark">
-	                                <tr>
-	                                    <th>Mã nhân viên</th>
-	                    				<th>Họ và tên</th>
-	                                    <th>Ngày sinh</th>
-	                                    <th>Email</th>
-	                                    <th>Giới tính</th>
-	                                    <th>Chức vụ</th>
-	                                	<th>Thao tác xử lý</th>
-	                            	</tr>
-	                            </thead>
-	                            <tbody class="text-center">
-	                            	<tr>
-	                                	<th class="id">3118410179</th>
-	                                	<th>Phạm Đức Khải</th>
-	                                	<th>23-06-2000</th>
-	                                	<th>duckhai0623@gmail.com</th>
-	                                	<th>Nam</th>
-	                                	<th>Nhân viên</th>
-	                                	<th>
-	                                		<a class="btn btn-danger delete">
-	                                		<!-- <a href="" class="btn btn-danger delete"> -->
-	                                			Xóa
-	                                		</a>
-	                                	</th>
-	                                </tr>
-	                            </tbody>
-	                        </table>
-	                    </div>
+							<!-- Begin Page Content -->
+							<div class="container-fluid">
+								<!-- Page Heading -->
+								<div class="container-fluid py-4">
+									<h1 class="h1 text-center text-gray-900"> Thêm nhân viên vào công việc </h1>
+								</div>
+
+								<div class="py-3">
+									<span class="iwt text-gray-900 h5 font-weight-bold">
+										<i class="fas fa-list"></i>
+											Bảng danh sách nhân viên tham gia
+									</span>
+								</div>
+
+								<!-- tblDanhSachNhanVienThamGia -->						
+								<div class="table-responsive mb-4">
+									<table class="table table-bordered" id="tblDanhSachNhanVienThamGia" width="100%" cellspacing="0">
+										<thead class="text-center thead-dark">
+											<tr>
+												<th>Mã nhân viên</th>
+												<th>Họ và tên</th>
+												<th>Ngày sinh</th>
+												<th>Email</th>
+												<th>Giới tính</th>
+												<th>Chức vụ</th>
+												<th>Thao tác xử lý</th>
+											</tr>
+										</thead>
+										<tbody class="text-center">
+											<tr>
+												<th class="id">3118410179</th>
+												<th>Phạm Đức Khải</th>
+												<th>23-06-2000</th>
+												<th>duckhai0623@gmail.com</th>
+												<th>Nam</th>
+												<th>Nhân viên</th>
+												<th>
+													<a class="btn btn-danger delete">Xóa</a>
+												</th>
+											</tr>
+										</tbody>
+									</table>
+								</div>							<!-- End of tblDanhSachNhanVienThamGia -->
+
+								<div class="py-4">
+									<span class="iwt text-gray-900 h5 font-weight-bold">
+										<i class="fas fa-list"></i>
+											Bảng danh sách nhân viên
+									</span>
+								</div>
+
+								<!-- tblDanhSachNhanVien -->
+								<div class="table-responsive mb-4">
+									<table class="table table-bordered" id="tblDanhSachNhanVien" width="100%" cellspacing="0">
+										<thead class="text-center thead-dark">
+											<tr>
+												<th>Mã nhân viên</th>
+												<th>Họ và tên</th>
+												<th>Ngày sinh</th>
+												<th>Email</th>
+												<th>Giới tính</th>
+												<th>Chức vụ</th>
+												<th>Thao tác xử lý</th>
+											</tr>
+										</thead>
+										<tbody class="text-center">
+											<tr>
+												<th class="id">
+													3118410202
+												</th>
+												<th>Hà Minh Khôi</th>
+												<th>??-??-2000</th>
+												<th>haminhkhoi@gmail.com</th>
+												<th>Nam</th>
+												<th>Giám đốc</th>
+												<th>
+													<a class="btn btn-success add">Thêm</a>
+												</th>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<!-- End of tblDanhSachNhanVien -->
+
+							</div>
+							<!-- End of Page Content -->
+
+						</div>
+						<!-- End of Main Contain -->							
 					</div>
-					<!-- End of tblDanhSachNhanVienThamGia -->
 
-	                <div class="my-4"></div>
+					<script src="js/jquery/jquery.js"></script>
+					<script>
+						$(document).ready(function(){
+							$("input[value='3118410179'").prop("checked",true);
+							$("input[value='3118410202'").prop("checked",false);
+						});
 
-	                <div class="">
-                        <span class="iwt text-gray-900">
-                        	<i class="fas fa-list"></i>
-                        	<span class="h5 font-weight-bold">
-								Bảng danh sách nhân viên
-							</span>
-						</span>
-                    </div>
+						$("#tblDanhSachNhanVienThamGia").on('click', '.delete', function() {
+							$(this).closest('tr').find('.delete').html("Thêm");
+							$(this).closest('tr').find('.delete').toggleClass("delete add btn-danger btn-success");
+							var id = $(this).closest('tr').find('.id').html();			
+							$("input[value='"+$.trim(id)+"']").prop("checked",false);
+							var currow = $(this).closest('tr').html();
+							$("#tblDanhSachNhanVien").append("<tr>" + currow + "</tr>");
+							$(this).closest('tr').remove();
+						});
 
-	                <!-- tblDanhSachNhanVien -->
-					<div class="card shadow mb-4">						
-						<div class="table-responsive">
-	                        <table class="table table-bordered" id="tblDanhSachNhanVien" width="100%" cellspacing="0">
-	                            <thead class="text-center thead-dark">
-	                                <tr>
-	                                    <th>Mã nhân viên</th>
-	                    				<th>Họ và tên</th>
-	                                    <th>Ngày sinh</th>
-	                                    <th>Email</th>
-	                                    <th>Giới tính</th>
-	                                    <th>Chức vụ</th>
-	                                	<th>Thao tác xử lý</th>
-	                            	</tr>
-	                            </thead>
-	                            <tbody class="text-center">
-	                            	<tr>
-	                                	<th class="id">
-	                                		3118410202
-	                                	</th>
-	                                	<th>Hà Minh Khôi</th>
-	                                	<th>??-??-2000</th>
-	                                	<th>haminhkhoi@gmail.com</th>
-	                                	<th>Nam</th>
-	                                	<th>Giám đốc</th>
-	                                	<th>
-	                                		<a class="btn btn-success add">
-	                                		<!-- <a href="" class="btn btn-success add"> -->
-	                                			Thêm 
-	                                		</a>
-	                                	</th>
-
-	                                </tr>
-	                            </tbody>
-	                        </table>
-	                    </div>
-					</div>
-					<!-- End of tblDanhSachNhanVien -->
-					<div>
-						3118410179
-						<input value="3118410179" type="checkbox" name="" checked="true">
-					</div>
-					<div>
-						3118410202
-						<input class="3118410202" value="3118410202" type="checkbox" name="" checked="false">
-					</div>
-	            </div>
-                <!-- End of Page Content -->
-
-            </div>
-            <!-- End of Main Contain -->
-
-        </div>
-        <!-- End of Content Wrapper -->
-    </div>
-
-	<script src="js/jquery/jquery.js"></script>
-	<script>
-		$(document).ready(function(){
-			$("input[value='3118410179'").prop("checked",true);
-			$("input[value='3118410202'").prop("checked",false);
-		});
-		
-		$("#tblDanhSachNhanVienThamGia").on('click', '.delete', function() {
-			$(this).closest('tr').find('.delete').html("Thêm");
-			$(this).closest('tr').find('.delete').toggleClass("delete add btn-danger btn-success");
-			var id = $(this).closest('tr').find('.id').html();			
-			$("input[value='"+$.trim(id)+"']").prop("checked",false);
-			var currow = $(this).closest('tr').html();
-	    	$("#tblDanhSachNhanVien").append("<tr>" + currow + "</tr>");
-	    	$(this).closest('tr').remove();
-		});
-
-		$("#tblDanhSachNhanVien").on('click', '.add', function() {
-			$(this).closest('tr').find('.add').html("Xóa");
-			$(this).closest('tr').find('.add').toggleClass("add delete btn-success btn-danger");
-			var id = $(this).closest('tr').find('.id').html();
-			$("input[value='"+$.trim(id)+"']").prop("checked",true);
+						$("#tblDanhSachNhanVien").on('click', '.add', function() {
+							$(this).closest('tr').find('.add').html("Xóa");
+							$(this).closest('tr').find('.add').toggleClass("add delete btn-success btn-danger");
+							var id = $(this).closest('tr').find('.id').html();
+							$("input[value='"+$.trim(id)+"']").prop("checked",true);
 			// $(this).closest('a').attr("href",id); (Khong duoc xoa dong nay)
-		    var currow = $(this).closest('tr').html();
-		    $("#tblDanhSachNhanVienThamGia").append("<tr>" + currow + "</tr>");
-		    $(this).closest('tr').remove();
+			var currow = $(this).closest('tr').html();
+			$("#tblDanhSachNhanVienThamGia").append("<tr>" + currow + "</tr>");
+			$(this).closest('tr').remove();
 		});
 	</script>
 </body>

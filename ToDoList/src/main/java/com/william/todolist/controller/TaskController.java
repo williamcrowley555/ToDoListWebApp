@@ -31,7 +31,7 @@ public class TaskController {
     public String listTasks(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = userService.getUserByEmail(auth.getName());
-        List<Task> taskList = taskService.getAllTask();
+        List<Task> taskList = taskService.getTaskByUser(currentUser);
 
         model.addAttribute("currentUser", currentUser);
         model.addAttribute("taskList", taskList);
@@ -46,6 +46,19 @@ public class TaskController {
         return "task_form";
     }
 
+    @GetMapping("/invite-users/{taskId}")
+    public String inviteUsers(Model model, @PathVariable("taskId") Long taskId) {
+        Task task = taskService.getTaskById(taskId);
+        List<User> participatedUsers = userService.getAllParticipatedUsersByTaskId(taskId);
+        List<User> unparticipatedUsers = userService.getAllUnparticipatedUsersByTaskId(taskId);
+
+        model.addAttribute("task", task);
+        model.addAttribute("participatedUsers", participatedUsers);
+        model.addAttribute("unparticipatedUsers", unparticipatedUsers);
+
+        return "task_users_invite";
+    }
+
     @PostMapping("/save")
     public String saveTask(@Valid @ModelAttribute("task") Task task, BindingResult bindingResult) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -58,8 +71,7 @@ public class TaskController {
         }
 
         taskService.saveTask(task);
-
-        return "redirect:/tasks";
+        return "redirect:/tasks/invite-users/" + task.getId();
     }
 
     @GetMapping("/edit/{id}")
@@ -101,4 +113,5 @@ public class TaskController {
 
         return "redirect:/tasks";
     }
+
 }

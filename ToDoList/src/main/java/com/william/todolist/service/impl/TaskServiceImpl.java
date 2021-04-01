@@ -1,6 +1,7 @@
 package com.william.todolist.service.impl;
 
 import com.william.todolist.model.Task;
+import com.william.todolist.model.User;
 import com.william.todolist.repository.TaskRepository;
 import com.william.todolist.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,11 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<Task> getAllTask() {
         return taskRepository.findAll();
+    }
+
+    @Override
+    public List<Task> getTaskByUser(User user) {
+        return taskRepository.findByUser(user);
     }
 
     @Override
