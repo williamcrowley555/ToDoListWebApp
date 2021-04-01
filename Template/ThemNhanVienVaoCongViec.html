@@ -8,7 +8,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<title>Test template</title>
+	<title>Thêm nhân viên vào công việc</title>
 
 	<!-- Custom fonts for this template-->
 	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -176,34 +176,22 @@
 						<!-- End of Main Contain -->							
 					</div>
 
-					<script src="js/jquery/jquery.js"></script>
-					<script>
-						$(document).ready(function(){
-							$("input[value='3118410179'").prop("checked",true);
-							$("input[value='3118410202'").prop("checked",false);
-						});
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
 
-						$("#tblDanhSachNhanVienThamGia").on('click', '.delete', function() {
-							$(this).closest('tr').find('.delete').html("Thêm");
-							$(this).closest('tr').find('.delete').toggleClass("delete add btn-danger btn-success");
-							var id = $(this).closest('tr').find('.id').html();			
-							$("input[value='"+$.trim(id)+"']").prop("checked",false);
-							var currow = $(this).closest('tr').html();
-							$("#tblDanhSachNhanVien").append("<tr>" + currow + "</tr>");
-							$(this).closest('tr').remove();
-						});
+	<!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
 
-						$("#tblDanhSachNhanVien").on('click', '.add', function() {
-							$(this).closest('tr').find('.add').html("Xóa");
-							$(this).closest('tr').find('.add').toggleClass("add delete btn-success btn-danger");
-							var id = $(this).closest('tr').find('.id').html();
-							$("input[value='"+$.trim(id)+"']").prop("checked",true);
-			// $(this).closest('a').attr("href",id); (Khong duoc xoa dong nay)
-			var currow = $(this).closest('tr').html();
-			$("#tblDanhSachNhanVienThamGia").append("<tr>" + currow + "</tr>");
-			$(this).closest('tr').remove();
-		});
-	</script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/ThemNhanVienVaoCongViec.js"></script>
+>>>>>>> 1e69ecd624a6800d70b8f164fd6fa76b3f18ec1a
 </body>
 
 </html>

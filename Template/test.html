@@ -1,58 +1,45 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+                                <table class="table table-bordered table-striped mb-0" id="tblBangBinhLuan">
+                                    <thead class="text-center">
+                                        <tr>
+                                            <th>Bảng bình luận</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="row">
+                                                    <div class="col-sm-1">
+                                                        <div class="thumbnail">
+                                                            <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                                                        </div>
+                                                    </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-        $("tbody").on('click', '.add', function() {
-       var currow = $(this).closest('tr').clone();
-       currow.find('td:last-child a').html('Remove').toggleClass('add remove');
-       
-       $("tbody").append("<tr>" + currow.html() + "</tr>");
-});
-
-$("tbody").on('click', '.remove', function() {
-       $(this).closest('tr').remove();
-});
-
-    </script>
-
-</head>
-<body>
-    <table id="choose-address-table" class="ui-widget ui-widget-content">
-    <thead>
-        <tr class="ui-widget-header ">
-            <th>Name/Nr.</th>
-            <th>Street</th>
-            <th>Town</th>
-            <th>Postcode</th>
-            <th>Country</th>
-            <th>Options</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="nr"><span>50</span>
-            </td>
-            <td>Some Street 1</td>
-            <td>Leeds</td>
-            <td>L0 0XX</td>
-            <td>United Kingdom</td>
-            <td>
-                <a href="#" class="add">Add</a>
-            </td>
-        </tr>
-        <tr>
-            <td class="nr">49</td>
-            <td>Some Street 2</td>
-            <td>Lancaster</td>
-            <td>L0 0XX</td>
-            <td>United Kingdom</td>
-            <td>
-                <a href="#" class="add">Add</a>
-            </td>
-        </tr>
-    </tbody>
-</table>
-</body>
-</html>
+                                                    <div class="col-sm-5">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading">
+                                                                <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                Panel content
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table table-bordered table-striped mb-0" id="tblBangNhacNho">
+                                    <thead class="text-center">
+                                        <tr>
+                                            <th>Bảng nhắc nhở</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Bùi Quang Huy: Làm lẹ hoặc bị đuổi khỏi nhóm</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
