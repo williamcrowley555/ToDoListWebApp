@@ -57,10 +57,12 @@ CREATE TABLE `task` (
   `status` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `user_id` bigint(20) DEFAULT NULL,
+  `finish_date` datetime NOT NULL,
+  `complete_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK2hsytmxysatfvt0p1992cw449` (`user_id`),
   CONSTRAINT `FK2hsytmxysatfvt0p1992cw449` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +71,7 @@ CREATE TABLE `task` (
 
 LOCK TABLES `task` WRITE;
 /*!40000 ALTER TABLE `task` DISABLE KEYS */;
-INSERT INTO `task` VALUES (1,'2021-04-01 00:00:00',1,'2021-03-24 00:00:00',1,'Công việc A',7);
+INSERT INTO `task` VALUES (1,'2021-04-01 00:00:00',1,'2021-03-24 00:00:00',2,'Công việc A',7,'0000-00-00 00:00:00','2021-04-01 16:07:12'),(3,'2021-04-15 00:00:00',1,'2021-04-01 00:00:00',1,'Công việc B',7,'0000-00-00 00:00:00',NULL);
 /*!40000 ALTER TABLE `task` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,6 +98,7 @@ CREATE TABLE `task_user` (
 
 LOCK TABLES `task_user` WRITE;
 /*!40000 ALTER TABLE `task_user` DISABLE KEYS */;
+INSERT INTO `task_user` VALUES (1,8),(1,9);
 /*!40000 ALTER TABLE `task_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +120,7 @@ CREATE TABLE `user` (
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +129,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,'1998-06-28','william123@gmail.com',1,'William',1,'Crowley','$2a$10$dCzUl6.ZaKFq.Wt5m8fJl.mAikp85qa.0lgqu.vC7Xb7GAiYPR40a'),(6,'2000-02-09','minhkhoi69@gmail.com',1,'Minh Khôi',1,'Hà','$2a$10$eq2EFQtuc/7eQbXAEoLDROMasPlYmT3AGM6PTU2Ks9y2HCCWO4s9G'),(7,'2000-05-13','ducthang123@gmail.com',1,'Đức Thắng',1,'Nguyễn','$2a$10$XhbTdg8vb8ATKUW2qI9xGuNlMD.OKDGBmw.Py/KIl7qvSEWDo2HHy');
+INSERT INTO `user` VALUES (2,'1998-06-28','william123@gmail.com',1,'William',1,'Crowley','$2a$10$dCzUl6.ZaKFq.Wt5m8fJl.mAikp85qa.0lgqu.vC7Xb7GAiYPR40a'),(6,'2000-02-09','minhkhoi69@gmail.com',1,'Minh Khôi',1,'Hà','$2a$10$eq2EFQtuc/7eQbXAEoLDROMasPlYmT3AGM6PTU2Ks9y2HCCWO4s9G'),(7,'2000-05-13','ducthang123@gmail.com',1,'Đức Thắng',1,'Nguyễn','$2a$10$XhbTdg8vb8ATKUW2qI9xGuNlMD.OKDGBmw.Py/KIl7qvSEWDo2HHy'),(8,'2000-07-13','dangkhoa69@gmail.com',1,'Đăng Khoa',1,'Nguyễn','$2a$10$41hGl9FoTuDHK5Igxxfq0e0x36SX3OZAtGgAAGDMDD2wh1KqNw2fK'),(9,'2001-11-21','minhthu123@gmail.com',1,'Minh Thư',0,'Trần','$2a$10$0LlxswF277QuVAO1Wmd7NOKoB6CDgWqykTZHhuJ64mLeAxh.BmiDC');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,7 +156,7 @@ CREATE TABLE `user_role` (
 
 LOCK TABLES `user_role` WRITE;
 /*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
-INSERT INTO `user_role` VALUES (6,1),(7,1),(2,2);
+INSERT INTO `user_role` VALUES (6,1),(7,1),(8,1),(9,1),(2,2);
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -166,4 +169,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-31 20:14:27
+-- Dump completed on 2021-04-01 16:09:08
