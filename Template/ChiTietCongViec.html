@@ -188,20 +188,32 @@
 	                        </div>
 	                        <div class="my-4"></div>
 	                        <!-- Comments Table -->
-	                        <div class="table-wrapper-scroll-y my-custom-scrollbar">
-								<table class="table table-bordered table-striped mb-0" id="tblBangBinhLuan">
+	                        <div class="table-wrapper-scroll- my-custom-scrollbar">
+								<table class="table table-bordered" id="tblBangBinhLuan">
     								<thead class="text-center">
       									<tr>
         									<th>Bảng bình luận</th>
       									</tr>
     								</thead>
 									<tbody>
-										<tr>
-									        <td>Hà Minh Khôi: Cần chỉnh sửa bố cục trang</td>
-									    </tr>
+            							<tr>
+									       	<td>
+										       	<div class="d-flex flex-column comment-section">
+	                								<div class="bg-white p-2">
+	                    								<div class="d-flex flex-row user-info"><img class="rounded-circle" src="img/BuiQuangHuy.jpg" width="40">
+	                        								<div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Bùi Quang Huy</span><span class="date text-black-50">2020-04-01</span></div>
+	                    								</div>
+	                    								<div class="mt-2">
+	                        								<p class="text-gray-900">Chỉnh sửa phần bình luận đi.</p>
+	                    								</div>
+	                								</div>
+	            								</div>
+            								</td>
+            							</tr>
 									</tbody>
 								</table>
-								<table class="table table-bordered table-striped mb-0" id="tblBangNhacNho">
+
+								<table class="table table-bordered" id="tblBangNhacNho">
     								<thead class="text-center">
       									<tr>
         									<th>Bảng nhắc nhở</th>
@@ -209,8 +221,19 @@
     								</thead>
 									<tbody>
 										<tr>
-									        <td>Bùi Quang Huy: Làm lẹ hoặc bị đuổi khỏi nhóm</td>
-									    </tr>
+									       	<td>
+										       	<div class="d-flex flex-column comment-section">
+	                								<div class="bg-white p-2">
+	                    								<div class="d-flex flex-row user-info"><img class="rounded-circle" src="img/BuiQuangHuy.jpg" width="40">
+	                        								<div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Bùi Quang Huy</span><span class="date text-black-50">2020-04-01</span></div>
+	                    								</div>
+	                    								<div class="mt-2">
+	                        								<p class="text-gray-900"> Làm lẹ hoặc bị đuổi</p>
+	                    								</div>
+	                								</div>
+	            								</div>
+            								</td>
+            							</tr>
 									</tbody>
 								</table>
 							</div>
@@ -241,41 +264,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-    <script src="js/jquery/jquery.js"></script>
-    <script>
-    	$(document).ready(function(){
-    		$("#binhLuan").show();
-    		$("#tblBangBinhLuan").show();
-    		$("#nhacNho").hide();
-    		$("#tblBangNhacNho").hide();
-    	});
-    	$("#buttonBinhLuan").on("click",function(){
-    		$("#binhLuan").show();
-    		$("#tblBangBinhLuan").show();
-    		$("#nhacNho").hide();
-    		$("#tblBangNhacNho").hide();
-    	});
-    	$("#buttonNhacNho").on("click", function(){
-    		$("#binhLuan").hide();
-    		$("#tblBangBinhLuan").hide();
-    		$("#nhacNho").show();
-    		$("#tblBangNhacNho").show();
-    	});
-    	$("#binhLuan").on("keydown", function(e){
-    		if(e.which==13)
-    		{
-    			var binhLuan = document.getElementById("binhLuan").value;
-    			$("#tblBangBinhLuan").append("<tr> <td> Phạm Đức Khải: "+ binhLuan +"</td> </tr>");
-    		}
-    	});
-    	$("#nhacNho").on("keydown", function(e){
-    		if(e.which==13)
-    		{
-    			var nhacNho = document.getElementById("nhacNho").value;
-    			$("#tblBangNhacNho").append("<tr> <td> Phạm Đức Khải: "+ nhacNho +"</td> </tr>");
-    		}
-    	});
-    </script>
-
+    <script src="js/ChiTietCongViec.js"></script>
 </body>
 </html>
