@@ -43,7 +43,8 @@
                             <tr>
                                 <th scope="col">Tiêu Đề</th>
                                 <th scope="col">Ngày Bắt Đầu</th>
-                                <th scope="col">Ngày kết Thúc</th>
+                                <th scope="col">Ngày Kết Thúc</th>
+                                <th scope="col">Ngày Hoàn Thành</th>
                                 <th scope="col">Phạm Vi</th>
                                 <th scope="col">Trạng Thái Công Việc</th>
                                 <th scope="col">Thao Tác</th>
@@ -55,6 +56,7 @@
                                     <th th:text="${task.title}" scope="row"></th>
                                     <td th:text="${task.startDateFormat}"></td>
                                     <td th:text="${task.endDateFormat}"></td>
+                                    <td th:text="${task.completeDate == null ? 'Chưa hoàn thành' : task.completeDateFormat}"></td>
                                     <td th:text="${task.sector == 1 ? 'Public' : 'Private'}"></td>
                                     <th:block th:switch="${task.status}">
                                         <td th:case="1">Đang thực hiện</td>

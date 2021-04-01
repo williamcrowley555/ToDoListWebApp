@@ -35,6 +35,10 @@ public class Task {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
 
+    @Column(name = "complete_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date completeDate;
+
     @Column(name = "sector", nullable = false)
     @NotNull(message = "Hãy chọn phạm vi")
     @Min(value = 1)
@@ -103,6 +107,14 @@ public class Task {
         this.endDate = endDate;
     }
 
+    public Date getCompleteDate() {
+        return completeDate;
+    }
+
+    public void setCompleteDate(Date completeDate) {
+        this.completeDate = completeDate;
+    }
+
     public Integer getSector() {
         return sector;
     }
@@ -151,6 +163,11 @@ public class Task {
     public String endDateFormat() {
         DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         return formatter.format(endDate);
+    }
+
+    public String completeDateFormat() {
+        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        return formatter.format(completeDate);
     }
 
     @Override

@@ -92,6 +92,7 @@ public class TaskController {
     public String completeTask(@PathVariable("id") Long id) {
         Task task = taskService.getTaskById(id);
         task.setStatus(2);
+        task.setCompleteDate(new Date(System.currentTimeMillis()));
 
         taskService.saveTask(task);
 
@@ -108,6 +109,7 @@ public class TaskController {
         } else {
             task.setStatus(1);
         }
+        task.setCompleteDate(null);
 
         taskService.saveTask(task);
 
