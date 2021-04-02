@@ -26,6 +26,10 @@
     <th:block th:if="${#strings.contains(headTitle, 'Form')}">
         <th:block th:replace="fragments/header :: add_work"></th:block>
     </th:block>
+
+    <th:block th:if="${headTitle == 'Task Details'}">
+        <th:block th:replace="fragments/header :: task_details"></th:block>
+    </th:block>
 </head>
 
 <!--    Extra HTML head Fragment-->
@@ -37,6 +41,10 @@
 
 <th:block th:fragment="add_work">
     <link rel="stylesheet" th:href="@{/css/add-work.css}">
+</th:block>
+
+<th:block th:fragment="task_details">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/task-details.css}">
 </th:block>
 
 <body>

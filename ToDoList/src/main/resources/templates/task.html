@@ -64,7 +64,7 @@
                                         <td th:case="3">Trễ hạn</td>
                                     </th:block >
                                     <td>
-                                        <a class="btn btn-primary"><i class="far fa-eye"></i></a>
+                                        <a th:href="@{|/tasks/details/${task.id}|}" class="btn btn-primary"><i class="far fa-eye"></i></a>
                                         <a th:href="@{|/tasks/edit/${task.id}|}" class="btn btn-success"><i class="fas fa-edit"></i></a>
                                         <a th:href="@{|/tasks/delete/${task.id}|}" th:onclick="|return confirm('Bạn có chắc muốn xóa công việc này?')|"
                                            class="btn btn-danger"><i class="far fa-trash-alt"></i></a>

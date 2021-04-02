@@ -25,7 +25,230 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-                <!--   Coding here...   -->
+                <!-- Page Heading -->
+                <div class="row py-4">
+                    <!-- Left Contain -->
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="text-center">
+                                <h1 class="h1 text-gray-900"> Chi tiết công việc </h1>
+                            </div>
+
+                            <!-- tblChiTietCongViec -->
+                            <div class="table-responsive">
+                                <table class="table table-fluid mb-0" id="tblChiTietCongViec">
+                                    <tbody>
+                                    <tr>
+                                        <th class="text-gray-900"> Mã công việc </th>
+                                        <th> 1 </th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-gray-900"> Người tạo công việc </th>
+                                        <th> Phạm Đức Khải </th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-gray-900"> Tên công việc </th>
+                                        <th> Lập danh sách nhân viên </th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-gray-900"> Ngày bắt đầu </th>
+                                        <th> 20-03-2021 </th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-gray-900"> Ngày kết thúc </th>
+                                        <th> 21-03-2021 </th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-gray-900"> Phạm vi </th>
+                                        <th> Cá nhân </th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-gray-900"> Trạng thái </th>
+                                        <th> Chưa hoàn thành </th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-gray-900"> Số người tham gia </th>
+                                        <th> 1 </th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-gray-900"> Tên thành viên </th>
+                                        <th> Phạm Đức Khải </th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-gray-900"> Tài liệu </th>
+                                        <th>
+                                            <div th:if="${uploadError != null}" th:text="${uploadError}"
+                                                 class="alert alert-danger" role="alert">Error Message
+                                            </div>
+                                            <form th:action="@{/tasks/upload-document}" method="POST" class="input-group mb-3" enctype="multipart/form-data">
+                                                <input type="hidden" name="taskId" th:value="${task.id}">
+                                                <div class="form-group w-100">
+                                                    <input type="file" class="form-control-file" name="document">
+                                                </div>
+                                                <input type="submit" class="btn btn-primary" value="Tải lên">
+                                            </form>
+                                        </th>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- End of tblChiTietCongViec -->
+
+                            <div class="row py-2">
+                                <th:block th:each="document : ${task.documents}">
+                                    <div class="col-6 col-md-3 pd-2 text-center">
+                                        <div class="py-2">
+                                            <img th:src="@{/img/document.png}" width="50">
+                                        </div>
+                                        <div>
+                                            <a th:href="@{/}" th:text="${document.name}"></a>
+                                        </div>
+                                        <div>
+                                            <span>[[${#numbers.formatInteger(document.size, 4 , 'COMMA')}]] bytes</span>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of Left Contain -->
+
+                    <!-- Right Contain -->
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-success" id="buttonBinhLuan">
+                                        Bình luận
+                                    </button>
+                                    <button type="button" class="btn btn-danger" id="buttonNhacNho">
+                                        Nhắc nhở
+                                    </button>
+                                </div>
+                                <div class="my-4">
+                                    <input type="text" class="form-control form-rounded" placeholder="Nhập bình luận" id="binhLuan">
+                                </div>
+                                <div class="my-4">
+                                    <input type="text" class="form-control form-rounded" placeholder="Nhập nhắc nhở" id="nhacNho">
+                                </div>
+                                <div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="my-4"></div>
+                        <!-- Comments Table -->
+                        <div class="table-wrapper-scroll- my-custom-scrollbar" id="divTbl">
+                            <table class="table table-bordered borderless tblBangBinhLuan" id="tblBangBinhLuan">
+                                <thead class="text-center">
+                                <tr>
+                                    <th>Bảng bình luận</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex flex-column comment-section">
+                                            <div class="bg-white p-2">
+                                                <div class="d-flex flex-row user-info"><img class="rounded-circle" th:src="@{/img/undraw_profile.svg}" width="40">
+                                                    <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Bùi Quang Huy</span><span class="date text-black-50">01-04-2020</span></div>
+                                                </div>
+                                                <div class="mt-2">
+                                                    <p class="text-gray-900">Chỉnh sửa phần bình luận đi.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex flex-column comment-section">
+                                            <div class="bg-white p-2">
+                                                <div class="d-flex flex-row user-info"><img class="rounded-circle" src="img/NguyenDangKhoa.jpg" width="40">
+                                                    <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Nguyễn Đăng Khoa</span><span class="date text-black-50">02-04-2020</span></div>
+                                                </div>
+                                                <div class="mt-2">
+                                                    <p class="text-gray-900">Web chưa được đẹp, cần chỉnh sửa lại nha Khải</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex flex-column comment-section">
+                                            <div class="bg-white p-2">
+                                                <div class="d-flex flex-row user-info"><img class="rounded-circle" src="img/PhamDucKhai.jpg" width="40">
+                                                    <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Phạm Đức Khải</span><span class="date text-black-50">02-04-2020</span></div>
+                                                </div>
+                                                <div class="mt-2">
+                                                    <p class="text-gray-900">Tui đang chơi game, lát làm</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table table-bordered borderless tblBangNhacNho" id="tblBangNhacNho">
+                                <thead class="text-center">
+                                <tr>
+                                    <th>Bảng nhắc nhở</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex flex-column comment-section">
+                                            <div class="bg-white p-2">
+                                                <div class="d-flex flex-row user-info"><img class="rounded-circle" src="img/HaMinhKhoi.jpg" width="40">
+                                                    <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Hà Minh Khôi</span><span class="date text-black-50">01-04-2020</span></div>
+                                                </div>
+                                                <div class="mt-2">
+                                                    <p class="text-gray-900"> Khải, ông chưa vẽ sơ đồ, vẽ nhanh đi nhóm mình sắp nộp rồi.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex flex-column comment-section">
+                                            <div class="bg-white p-2">
+                                                <div class="d-flex flex-row user-info"><img class="rounded-circle" src="img/BuiQuangHuy.jpg" width="40">
+                                                    <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Bùi Quang Huy</span><span class="date text-black-50">01-04-2020</span></div>
+                                                </div>
+                                                <div class="mt-2">
+                                                    <p class="text-gray-900"> Web chưa được đẹp, cần chỉnh sửa lại nha Khải</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex flex-column comment-section">
+                                            <div class="bg-white p-2">
+                                                <div class="d-flex flex-row user-info"><img class="rounded-circle" src="img/PhamDucKhai.jpg" width="40">
+                                                    <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Phạm Đức Khải</span><span class="date text-black-50">01-04-2020</span></div>
+                                                </div>
+                                                <div class="mt-2">
+                                                    <p class="text-gray-900"> OK tui làm liền.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- End of Comments Table -->
+                    </div>
+                    <!-- End of Right Contain -->
+
+                </div>
+                <!-- End of Row Divine -->
             </div>
             <!-- /.container-fluid -->
 

@@ -63,6 +63,9 @@ public class Task {
     @Valid
     private Set<User> participatedUsers = new HashSet<>();
 
+    @OneToMany(mappedBy = "task", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Document> documents = new HashSet<>();
+
     public Task() {
     }
 
@@ -147,12 +150,28 @@ public class Task {
         this.participatedUsers = participatedUsers;
     }
 
+    public Set<Document> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(Set<Document> documents) {
+        this.documents = documents;
+    }
+
     public void addParticipatedUser(User user) {
         this.participatedUsers.add(user);
     }
 
     public void removeParticipatedUser(User user) {
         this.participatedUsers.remove(user);
+    }
+
+    public void addDocument(Document document) {
+        this.documents.add(document);
+    }
+
+    public void removeDocument(Document document) {
+        this.documents.remove(document);
     }
 
     public String startDateFormat() {

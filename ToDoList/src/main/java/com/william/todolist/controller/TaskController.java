@@ -1,5 +1,6 @@
 package com.william.todolist.controller;
 
+import com.william.todolist.model.Document;
 import com.william.todolist.model.Role;
 import com.william.todolist.model.Task;
 import com.william.todolist.model.User;
@@ -10,10 +11,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -68,6 +72,14 @@ public class TaskController {
 
         if (bindingResult.hasErrors()) {
             return "task_form";
+        }
+
+        if (task.getId() != null) {
+            Task oldTask = taskService.getTaskById(task.getId());
+
+            task.setStatus(oldTask.getStatus());
+            task.setParticipatedUsers(oldTask.getParticipatedUsers());
+            task.setCompleteDate(oldTask.getCompleteDate());
         }
 
         taskService.saveTask(task);
@@ -138,6 +150,43 @@ public class TaskController {
         taskService.saveTask(task);
 
         return "redirect:/tasks/invite-users/" + taskId;
+    }
+
+    @GetMapping("/details/{id}")
+    public String showTaskDetails(Model model, @PathVariable("id") Long id) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userService.getUserByEmail(auth.getName());
+        Task task = taskService.getTaskById(id);
+
+        model.addAttribute("currentUser", currentUser);
+        model.addAttribute("task", task);
+        return "task_details";
+    }
+
+    @PostMapping("/upload-document")
+    public String uploadDocument(Model model, @RequestParam("taskId") Long taskId,
+                                 @RequestParam("document") MultipartFile multipartFile) throws IOException {
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        Task task = taskService.getTaskById(taskId);
+
+        for (Document document : task.getDocuments()) {
+            if (document.getName().equals(fileName)) {
+                model.addAttribute("uploadError", "File đã tồn tại");
+                return "redirect:/tasks/details/" + taskId;
+            }
+        }
+
+        Document document = new Document();
+        document.setName(fileName);
+        document.setContent(multipartFile.getBytes());
+        document.setSize(multipartFile.getSize());
+        document.setUploadTime(new Date(System.currentTimeMillis()));
+        document.setTask(task);
+
+        task.addDocument(document);
+        taskService.saveTask(task);
+
+        return "redirect:/tasks/details/" + taskId;
     }
 
 }

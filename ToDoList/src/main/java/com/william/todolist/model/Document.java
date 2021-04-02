@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Arrays;
 import java.util.Date;
 
 @Entity(name = "Document")
@@ -28,15 +29,20 @@ public class Document {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date uploadTime;
 
+    @ManyToOne
+    @JoinColumn(name = "task_id")
+    private Task task;
+
     public Document() {
     }
 
-    public Document(Long id, String name, byte[] content, long size, Date uploadTime) {
+    public Document(Long id, String name, byte[] content, long size, Date uploadTime, Task task) {
         this.id = id;
         this.name = name;
         this.content = content;
         this.size = size;
         this.uploadTime = uploadTime;
+        this.task = task;
     }
 
     public Long getId() {
@@ -77,5 +83,25 @@ public class Document {
 
     public void setUploadTime(Date uploadTime) {
         this.uploadTime = uploadTime;
+    }
+
+    public Task getTask() {
+        return task;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
+
+    @Override
+    public String toString() {
+        return "Document{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", content=" + Arrays.toString(content) +
+                ", size=" + size +
+                ", uploadTime=" + uploadTime +
+                ", task=" + task +
+                '}';
     }
 }
