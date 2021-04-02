@@ -97,8 +97,11 @@
                             <div class="row py-2">
                                 <th:block th:each="document : ${task.documents}">
                                     <div class="col-6 col-md-3 pd-2 text-center">
-                                        <div class="py-2">
+                                        <div class="position-relative py-2">
                                             <img th:src="@{/img/document.png}" width="50">
+                                            <a th:href="@{|/tasks/delete-document/${document.id}?taskId=${task.id}|}" class="position-absolute" style="top: -20px; right:0;">
+                                                <i class="fas fa-times-circle h5 text-danger"></i>
+                                            </a>
                                         </div>
                                         <div>
                                             <a th:href="@{/}" th:text="${document.name}"></a>

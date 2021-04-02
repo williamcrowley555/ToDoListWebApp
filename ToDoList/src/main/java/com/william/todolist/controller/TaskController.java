@@ -1,9 +1,9 @@
 package com.william.todolist.controller;
 
 import com.william.todolist.model.Document;
-import com.william.todolist.model.Role;
 import com.william.todolist.model.Task;
 import com.william.todolist.model.User;
+import com.william.todolist.service.DocumentService;
 import com.william.todolist.service.TaskService;
 import com.william.todolist.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +30,9 @@ public class TaskController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private DocumentService documentService;
 
     @GetMapping("")
     public String listTasks(Model model) {
@@ -185,6 +188,16 @@ public class TaskController {
 
         task.addDocument(document);
         taskService.saveTask(task);
+
+        return "redirect:/tasks/details/" + taskId;
+    }
+
+    @GetMapping("/delete-document/{id}")
+    public String deleteDocument(Model model, @RequestParam("taskId") Long taskId,
+                                 @PathVariable("id") Long documentId) {
+        Document document = documentService.getDocumentById(documentId);
+
+        documentService.deleteDocumentById(documentId);
 
         return "redirect:/tasks/details/" + taskId;
     }

@@ -41,4 +41,10 @@ public class DocumentRepositoryTest {
         assert savedDoc.getSize() == bytes.length;
     }
 
+    @Test
+    public void testDeleteDocumentById() {
+//        Document document = documentRepository.findById(5L).get();
+        documentRepository.deleteById(5L);
+    }
+
 }

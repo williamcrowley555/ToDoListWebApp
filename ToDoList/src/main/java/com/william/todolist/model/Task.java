@@ -63,8 +63,15 @@ public class Task {
     @Valid
     private Set<User> participatedUsers = new HashSet<>();
 
-    @OneToMany(mappedBy = "task", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "task", fetch = FetchType.EAGER)
     private Set<Document> documents = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "task_comment",
+            joinColumns = @JoinColumn(name = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "comment_id")
+    )
+    private Set<Comment> comments = new HashSet<>();
 
     public Task() {
     }
@@ -156,6 +163,14 @@ public class Task {
 
     public void setDocuments(Set<Document> documents) {
         this.documents = documents;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 
     public void addParticipatedUser(User user) {

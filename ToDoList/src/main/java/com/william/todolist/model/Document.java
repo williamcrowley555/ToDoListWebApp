@@ -1,17 +1,15 @@
 package com.william.todolist.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity(name = "Document")
 @Table(name = "document",
         uniqueConstraints = {@UniqueConstraint(name = "document_name_unique", columnNames = "name")})
 public class Document {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,7 +24,6 @@ public class Document {
     private long size;
 
     @Column(name = "upload_time", nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date uploadTime;
 
     @ManyToOne
