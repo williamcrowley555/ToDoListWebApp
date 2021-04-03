@@ -6,8 +6,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity(name = "Document")
-@Table(name = "document",
-        uniqueConstraints = {@UniqueConstraint(name = "document_name_unique", columnNames = "name")})
+@Table(name = "document")
 public class Document {
 
     @Id

@@ -59,6 +59,8 @@ public class UserServiceImpl implements UserService {
 
         if (unparticipatedUsers.isEmpty()) {
             unparticipatedUsers = userRepository.findAll();
+//        Except task host
+            unparticipatedUsers.remove(task.getUser());
         }
 
         return unparticipatedUsers;

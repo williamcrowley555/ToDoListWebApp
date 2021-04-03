@@ -100,7 +100,7 @@
 
                             <div class="row py-2">
                                 <th:block th:each="document : ${task.documents}">
-                                    <div class="col-6 col-md-3 pd-2 text-center">
+                                    <div class="col-6 col-md-3 m-2 text-center">
                                         <div class="position-relative py-2">
                                             <img th:src="@{/img/document.png}" width="50">
                                             <a th:href="@{|/tasks/delete-document/${document.id}?taskId=${task.id}|}" class="position-absolute" style="top: -20px; right:0;">
@@ -137,9 +137,9 @@
                                         <input th:field="*{content}" type="text" class="form-control form-rounded" placeholder="Nhập bình luận" id="binhLuan">
                                     </form>
                                 </div>
-                                <div class="my-4">
-                                    <form method="POST" id="reminderForm">
-                                        <input type="text" class="form-control form-rounded" placeholder="Nhập nhắc nhở" id="nhacNho">
+                                <div sec:authorize="hasRole('ROLE_ADMIN')" class="my-4">
+                                    <form th:action="@{|/tasks/add-reminder?taskId=${task.id}|}" th:object="${reminder}" method="POST" id="reminderForm">
+                                        <input th:field="*{content}" type="text" class="form-control form-rounded" placeholder="Nhập nhắc nhở" id="nhacNho">
                                     </form>
                                 </div>
                                 <div>
@@ -162,7 +162,8 @@
                                             <td class="pb-0">
                                                 <div class="d-flex flex-column comment-section">
                                                     <div class="p-2">
-                                                        <div th:classappend="${currentUser == comment.user ? 'flex-row-reverse' : 'flex-row'}" class="d-flex user-info"><img class="rounded-circle" th:src="@{/img/undraw_profile.svg}" width="40">
+                                                        <div th:classappend="${currentUser == comment.user ? 'flex-row-reverse' : 'flex-row'}" class="d-flex user-info">
+                                                            <img class="rounded-circle" th:src="@{/img/undraw_profile.svg}" width="40">
                                                             <div class="d-flex flex-column justify-content-start mx-2">
                                                                 <span th:text="${comment.user.fullName}" th:classappend="${currentUser == comment.user ? 'text-right' : ''}" class="d-block font-weight-bold name"></span>
                                                                 <span th:text="${comment.commentTime}" th:classappend="${currentUser == comment.user ? 'text-right' : ''}" class="date text-black-50"></span>
@@ -179,55 +180,33 @@
                                 </tbody>
                             </table>
 
-                            <table class="table table-bordered borderless tblBangNhacNho" id="tblBangNhacNho">
+                            <table class="table table-bordered borderless bg-white tblBangNhacNho" id="tblBangNhacNho">
                                 <thead class="text-center">
                                 <tr>
                                     <th>Bảng nhắc nhở</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex flex-column comment-section">
-                                            <div class="bg-white p-2">
-                                                <div class="d-flex flex-row user-info"><img class="rounded-circle" src="img/HaMinhKhoi.jpg" width="40">
-                                                    <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Hà Minh Khôi</span><span class="date text-black-50">01-04-2020</span></div>
+                                    <th:block th:each="reminder : ${task.reminders}">
+                                        <tr>
+                                            <td class="pb-0">
+                                                <div class="d-flex flex-column comment-section">
+                                                    <div class="p-2">
+                                                        <div th:classappend="${currentUser == reminder.user ? 'flex-row-reverse' : 'flex-row'}" class="d-flex user-info">
+                                                            <img class="rounded-circle" th:src="@{/img/undraw_profile.svg}" width="40">
+                                                            <div class="d-flex flex-column justify-content-start mx-2">
+                                                                <span th:text="${reminder.user.fullName}" th:classappend="${currentUser == reminder.user ? 'text-right' : ''}" class="d-block font-weight-bold name"></span>
+                                                                <span th:text="${reminder.reminderTime}" th:classappend="${currentUser == reminder.user ? 'text-right' : ''}" class="date text-black-50"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div th:classappend="${currentUser == reminder.user ? 'text-right' : ''}" class="mt-2">
+                                                            <p th:text="${reminder.content}" class="text-gray-900"></p>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="mt-2">
-                                                    <p class="text-gray-900"> Khải, ông chưa vẽ sơ đồ, vẽ nhanh đi nhóm mình sắp nộp rồi.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex flex-column comment-section">
-                                            <div class="bg-white p-2">
-                                                <div class="d-flex flex-row user-info"><img class="rounded-circle" src="img/BuiQuangHuy.jpg" width="40">
-                                                    <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Bùi Quang Huy</span><span class="date text-black-50">01-04-2020</span></div>
-                                                </div>
-                                                <div class="mt-2">
-                                                    <p class="text-gray-900"> Web chưa được đẹp, cần chỉnh sửa lại nha Khải</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex flex-column comment-section">
-                                            <div class="bg-white p-2">
-                                                <div class="d-flex flex-row user-info"><img class="rounded-circle" src="img/PhamDucKhai.jpg" width="40">
-                                                    <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Phạm Đức Khải</span><span class="date text-black-50">01-04-2020</span></div>
-                                                </div>
-                                                <div class="mt-2">
-                                                    <p class="text-gray-900"> OK tui làm liền.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                            </td>
+                                        </tr>
+                                    </th:block>
                                 </tbody>
                             </table>
                         </div>

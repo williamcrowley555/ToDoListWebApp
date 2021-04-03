@@ -76,6 +76,14 @@ public class Task {
     @OrderBy("commentTime ASC")
     private Set<Comment> comments = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "task_reminder",
+            joinColumns = @JoinColumn(name = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "reminder_id")
+    )
+    @OrderBy("reminderTime ASC")
+    private Set<Reminder> reminders = new HashSet<>();
+
     public Task() {
     }
 
@@ -176,12 +184,20 @@ public class Task {
         this.comments = comments;
     }
 
+    public Set<Reminder> getReminders() {
+        return reminders;
+    }
+
+    public void setReminders(Set<Reminder> reminders) {
+        this.reminders = reminders;
+    }
+
     public String getParticipatedUsersAsFullName() {
         String users = "";
         for (User user : this.participatedUsers) {
             users += user.getFullName() + ", ";
         }
-        return users.substring(0, users.length() -2);
+        return users.isBlank() ? users : users.substring(0, users.length() -2);
     }
 
     public void addParticipatedUser(User user) {
@@ -206,6 +222,14 @@ public class Task {
 
     public void removeComment(Comment comment) {
         this.comments.remove(comment);
+    }
+
+    public void addReminder(Reminder reminder) {
+        this.reminders.add(reminder);
+    }
+
+    public void removeReminder(Reminder reminder) {
+        this.reminders.remove(reminder);
     }
 
     public String startDateFormat() {

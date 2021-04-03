@@ -6,6 +6,7 @@ import com.william.todolist.service.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,5 +41,10 @@ public class DocumentServiceImpl implements DocumentService {
     @Override
     public void deleteDocumentById(Long id) {
         documentRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteAllDocument(Collection<Document> documents) {
+        documentRepository.deleteAll(documents);
     }
 }

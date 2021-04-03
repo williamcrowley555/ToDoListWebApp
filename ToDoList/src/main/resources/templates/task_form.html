@@ -31,7 +31,7 @@
                     </div>
 
                     <!-- Task Form -->
-                    <form th:action="@{/tasks/save}" th:object="${task}" method="POST" class="user">
+                    <form th:action="@{|/tasks/${task.id == null ? 'save' : 'edit'}|}" th:object="${task}" method="POST" class="user">
                         <div th:if="${#fields.hasErrors('*')}" th:errors="*"
                              class="alert alert-danger" role="alert">Error Message
                         </div>

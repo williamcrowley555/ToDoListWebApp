@@ -1,10 +1,7 @@
 package com.william.todolist.controller;
 
 import com.william.todolist.model.*;
-import com.william.todolist.service.DocumentService;
-import com.william.todolist.service.RoleService;
-import com.william.todolist.service.TaskService;
-import com.william.todolist.service.UserService;
+import com.william.todolist.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +11,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -35,6 +33,12 @@ public class TaskController {
 
     @Autowired
     private DocumentService documentService;
+
+    @Autowired
+    private CommentService commentService;
+
+    @Autowired
+    private ReminderService reminderService;
 
     @GetMapping("")
     public String listTasks(Model model) {
@@ -89,14 +93,6 @@ public class TaskController {
             return "task_form";
         }
 
-        if (task.getId() != null) {
-            Task oldTask = taskService.getTaskById(task.getId());
-
-            task.setStatus(oldTask.getStatus());
-            task.setParticipatedUsers(oldTask.getParticipatedUsers());
-            task.setCompleteDate(oldTask.getCompleteDate());
-        }
-
         taskService.saveTask(task);
         return "redirect:/tasks/invite-users/" + task.getId();
     }
@@ -109,9 +105,42 @@ public class TaskController {
         return "task_form";
     }
 
+    @PostMapping("/edit")
+    public String editTask(@Valid @ModelAttribute("task") Task task, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "task_form";
+        }
+
+        if (task.getId() != null) {
+            Task oldTask = taskService.getTaskById(task.getId());
+
+            task.setCompleteDate(oldTask.getCompleteDate());
+            task.setStatus(oldTask.getStatus());
+            task.setUser(oldTask.getUser());
+            task.setParticipatedUsers(oldTask.getParticipatedUsers());
+            task.setDocuments(oldTask.getDocuments());
+            task.setComments(oldTask.getComments());
+            task.setReminders(oldTask.getReminders());
+
+            taskService.saveTask(task);
+        }
+
+        return "redirect:/tasks/invite-users/" + task.getId();
+    }
+
     @GetMapping("/delete/{id}")
     public String deleteTask(@PathVariable("id") Long id) {
+        Task task = taskService.getTaskById(id);
+
+        task.setParticipatedUsers(null);
+        taskService.saveTask(task);
+
+        documentService.deleteAllDocument(task.getDocuments());
+        commentService.deleteAllComment(task.getComments());
+        reminderService.deleteAllComment(task.getReminders());
+
         taskService.deleteTaskById(id);
+
         return "redirect:/tasks";
     }
 
@@ -176,12 +205,13 @@ public class TaskController {
         model.addAttribute("currentUser", currentUser);
         model.addAttribute("task", task);
         model.addAttribute("comment", new Comment());
+        model.addAttribute("reminder", new Reminder());
 
         return "task_details";
     }
 
     @PostMapping("/upload-document")
-    public String uploadDocument(Model model, @RequestParam("taskId") Long taskId,
+    public String uploadDocument(RedirectAttributes redirectAttributes, @RequestParam("taskId") Long taskId,
                                  @RequestParam("document") MultipartFile multipartFile) throws IOException {
 
         if (multipartFile.getSize() <= 0)
@@ -192,7 +222,7 @@ public class TaskController {
 
         for (Document document : task.getDocuments()) {
             if (document.getName().equals(fileName)) {
-                model.addAttribute("uploadError", "File đã tồn tại");
+                redirectAttributes.addFlashAttribute("uploadError", "File đã tồn tại");
                 return "redirect:/tasks/details/" + taskId;
             }
         }
@@ -230,6 +260,22 @@ public class TaskController {
         comment.setUser(currentUser);
 
         task.addComment(comment);
+        taskService.saveTask(task);
+
+        return "redirect:/tasks/details/" + taskId;
+    }
+
+    @PostMapping("/add-reminder")
+    public String addReminder(@RequestParam("taskId") Long taskId,
+                             @ModelAttribute("reminder") Reminder reminder) {
+        Task task = taskService.getTaskById(taskId);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userService.getUserByEmail(auth.getName());
+
+        reminder.setReminderTime(new Date(System.currentTimeMillis()));
+        reminder.setUser(currentUser);
+
+        task.addReminder(reminder);
         taskService.saveTask(task);
 
         return "redirect:/tasks/details/" + taskId;
