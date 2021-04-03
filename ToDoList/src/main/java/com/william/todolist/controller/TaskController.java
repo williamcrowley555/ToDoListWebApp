@@ -169,6 +169,10 @@ public class TaskController {
     @PostMapping("/upload-document")
     public String uploadDocument(Model model, @RequestParam("taskId") Long taskId,
                                  @RequestParam("document") MultipartFile multipartFile) throws IOException {
+
+        if (multipartFile.getSize() <= 0)
+            return "redirect:/tasks/details/" + taskId;
+
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         Task task = taskService.getTaskById(taskId);
 
@@ -186,8 +190,7 @@ public class TaskController {
         document.setUploadTime(new Date(System.currentTimeMillis()));
         document.setTask(task);
 
-        task.addDocument(document);
-        taskService.saveTask(task);
+        documentService.saveDocument(document);
 
         return "redirect:/tasks/details/" + taskId;
     }

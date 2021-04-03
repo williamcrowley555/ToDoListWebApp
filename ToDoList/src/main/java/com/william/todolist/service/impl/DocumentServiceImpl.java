@@ -33,6 +33,11 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
+    public Document saveDocument(Document document) {
+        return documentRepository.save(document);
+    }
+
+    @Override
     public void deleteDocumentById(Long id) {
         documentRepository.deleteById(id);
     }

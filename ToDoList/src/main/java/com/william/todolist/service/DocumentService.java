@@ -8,5 +8,6 @@ public interface DocumentService {
 
     List<Document> getAllDocument();
     Document getDocumentById(Long id);
+    Document saveDocument(Document document);
     void deleteDocumentById(Long id);
 }
