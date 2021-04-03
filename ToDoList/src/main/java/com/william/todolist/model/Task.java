@@ -10,7 +10,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity(name = "Task")
 @Table(name = "task")
@@ -71,6 +73,7 @@ public class Task {
             joinColumns = @JoinColumn(name = "task_id"),
             inverseJoinColumns = @JoinColumn(name = "comment_id")
     )
+    @OrderBy("commentTime ASC")
     private Set<Comment> comments = new HashSet<>();
 
     public Task() {
@@ -171,6 +174,14 @@ public class Task {
 
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
+    }
+
+    public String getParticipatedUsersAsFullName() {
+        String users = "";
+        for (User user : this.participatedUsers) {
+            users += user.getFullName() + ", ";
+        }
+        return users.substring(0, users.length() -2);
     }
 
     public void addParticipatedUser(User user) {

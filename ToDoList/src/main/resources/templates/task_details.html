@@ -39,43 +39,47 @@
                                 <table class="table table-fluid mb-0" id="tblChiTietCongViec">
                                     <tbody>
                                     <tr>
-                                        <th class="text-gray-900"> Mã công việc </th>
-                                        <th> 1 </th>
+                                        <th class="text-gray-900">Mã công việc</th>
+                                        <th th:text="${task.id}"></th>
                                     </tr>
                                     <tr>
-                                        <th class="text-gray-900"> Người tạo công việc </th>
-                                        <th> Phạm Đức Khải </th>
+                                        <th class="text-gray-900">Người tạo công việc</th>
+                                        <th th:text="${task.user.fullName}"></th>
                                     </tr>
                                     <tr>
-                                        <th class="text-gray-900"> Tên công việc </th>
-                                        <th> Lập danh sách nhân viên </th>
+                                        <th class="text-gray-900">Tên công việc</th>
+                                        <th th:text="${task.title}"></th>
                                     </tr>
                                     <tr>
-                                        <th class="text-gray-900"> Ngày bắt đầu </th>
-                                        <th> 20-03-2021 </th>
+                                        <th class="text-gray-900">Ngày bắt đầu</th>
+                                        <th th:text="${task.startDateFormat}"></th>
                                     </tr>
                                     <tr>
-                                        <th class="text-gray-900"> Ngày kết thúc </th>
-                                        <th> 21-03-2021 </th>
+                                        <th class="text-gray-900">Ngày kết thúc</th>
+                                        <th th:text="${task.endDateFormat}"></th>
                                     </tr>
                                     <tr>
-                                        <th class="text-gray-900"> Phạm vi </th>
-                                        <th> Cá nhân </th>
+                                        <th class="text-gray-900">Phạm vi</th>
+                                        <th th:text="${task.sector == 1 ? 'Public' : 'Private'}"></th>
                                     </tr>
                                     <tr>
-                                        <th class="text-gray-900"> Trạng thái </th>
-                                        <th> Chưa hoàn thành </th>
+                                        <th class="text-gray-900">Trạng thái</th>
+                                        <th:block th:switch="${task.status}">
+                                            <th th:case="1">Đang thực hiện</th>
+                                            <th th:case="2">Hoàn thành</th>
+                                            <th th:case="3">Trễ hạn</th>
+                                        </th:block>
                                     </tr>
                                     <tr>
-                                        <th class="text-gray-900"> Số người tham gia </th>
-                                        <th> 1 </th>
+                                        <th class="text-gray-900">Số người tham gia</th>
+                                        <th th:text="${#lists.size(task.participatedUsers)}"></th>
                                     </tr>
                                     <tr>
-                                        <th class="text-gray-900"> Tên thành viên </th>
-                                        <th> Phạm Đức Khải </th>
+                                        <th class="text-gray-900">Tên thành viên</th>
+                                        <th th:text="${task.participatedUsersAsFullName}"></th>
                                     </tr>
                                     <tr>
-                                        <th class="text-gray-900"> Tài liệu </th>
+                                        <th class="text-gray-900">Tài liệu</th>
                                         <th>
                                             <div th:if="${uploadError != null}" th:text="${uploadError}"
                                                  class="alert alert-danger" role="alert">Error Message

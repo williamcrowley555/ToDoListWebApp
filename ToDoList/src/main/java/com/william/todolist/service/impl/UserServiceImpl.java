@@ -48,10 +48,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUnparticipatedUsersByTaskId(Long taskId) {
+        Task task = taskRepository.findById(taskId).get();
         List<User> unparticipatedUsers = new ArrayList<>();
         List<User> participatedUsers = this.getAllParticipatedUsersByTaskId(taskId);
         List<Long> ids = participatedUsers.stream().map(item -> item.getId()).collect(Collectors.toList());
+
         unparticipatedUsers = userRepository.findAllNotIn(ids);
+//        Except task host
+        unparticipatedUsers.remove(task.getUser());
 
         if (unparticipatedUsers.isEmpty()) {
             unparticipatedUsers = userRepository.findAll();

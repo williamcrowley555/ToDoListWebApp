@@ -33,6 +33,11 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public Role getRoleByNormalizedName(String normalizedName) {
+        return roleRepository.findByNormalizedName(normalizedName);
+    }
+
+    @Override
     public Role saveRole(Role role) {
         return roleRepository.save(role);
     }

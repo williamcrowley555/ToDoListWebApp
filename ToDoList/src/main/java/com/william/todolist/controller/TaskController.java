@@ -1,10 +1,8 @@
 package com.william.todolist.controller;
 
-import com.william.todolist.model.Comment;
-import com.william.todolist.model.Document;
-import com.william.todolist.model.Task;
-import com.william.todolist.model.User;
+import com.william.todolist.model.*;
 import com.william.todolist.service.DocumentService;
+import com.william.todolist.service.RoleService;
 import com.william.todolist.service.TaskService;
 import com.william.todolist.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,16 +31,29 @@ public class TaskController {
     private UserService userService;
 
     @Autowired
+    private RoleService roleService;
+
+    @Autowired
     private DocumentService documentService;
 
     @GetMapping("")
     public String listTasks(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = userService.getUserByEmail(auth.getName());
-        List<Task> taskList = taskService.getTaskByUser(currentUser);
+        Role adminRole = roleService.getRoleByNormalizedName("ROLE_ADMIN");
+        System.out.println(adminRole);
+        List<Task> taskList = null;
+
+        if (currentUser.getRoles().contains(adminRole)) {
+            taskList = taskService.getAllTask();
+        } else {
+            taskList = taskService.getTaskByUser(currentUser);
+            taskList.addAll(taskService.getTaskByParticipatedUser(currentUser));
+        }
 
         model.addAttribute("currentUser", currentUser);
         model.addAttribute("taskList", taskList);
+        model.addAttribute("admin", currentUser.getRoles().contains(adminRole));
         return "task";
     }
 
@@ -165,6 +176,7 @@ public class TaskController {
         model.addAttribute("currentUser", currentUser);
         model.addAttribute("task", task);
         model.addAttribute("comment", new Comment());
+
         return "task_details";
     }
 

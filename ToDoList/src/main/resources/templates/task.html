@@ -52,7 +52,7 @@
                         </thead>
                         <tbody>
                             <th:block th:each="task : ${taskList}">
-                                <tr th:if="${task.user != null && task.user.id == currentUser.id}">
+                                <tr>
                                     <th th:text="${task.title}" scope="row"></th>
                                     <td th:text="${task.startDateFormat}"></td>
                                     <td th:text="${task.endDateFormat}"></td>
@@ -62,17 +62,19 @@
                                         <td th:case="1">Đang thực hiện</td>
                                         <td th:case="2">Hoàn thành</td>
                                         <td th:case="3">Trễ hạn</td>
-                                    </th:block >
+                                    </th:block>
                                     <td>
                                         <a th:href="@{|/tasks/details/${task.id}|}" class="btn btn-primary"><i class="far fa-eye"></i></a>
-                                        <a th:href="@{|/tasks/edit/${task.id}|}" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                                        <a th:href="@{|/tasks/delete/${task.id}|}" th:onclick="|return confirm('Bạn có chắc muốn xóa công việc này?')|"
-                                           class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
-                                        <th:block th:if="${task.status == 2}">
-                                            <a th:href="@{|/tasks/incomplete/${task.id}|}" class="btn btn-danger"><i class="fas fa-times"></i></a>
-                                        </th:block>
-                                        <th:block th:unless="${task.status == 2}">
-                                            <a th:href="@{|/tasks/complete/${task.id}|}" class="btn btn-success"><i class="fas fa-check"></i></a>
+                                        <th:block th:if="${task.user == currentUser || admin}">
+                                            <a th:href="@{|/tasks/edit/${task.id}|}" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                            <a th:href="@{|/tasks/delete/${task.id}|}" th:onclick="|return confirm('Bạn có chắc muốn xóa công việc này?')|"
+                                               class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                                            <th:block th:if="${task.status == 2}">
+                                                <a th:href="@{|/tasks/incomplete/${task.id}|}" class="btn btn-danger"><i class="fas fa-times"></i></a>
+                                            </th:block>
+                                            <th:block th:unless="${task.status == 2}">
+                                                <a th:href="@{|/tasks/complete/${task.id}|}" class="btn btn-success"><i class="fas fa-check"></i></a>
+                                            </th:block>
                                         </th:block>
                                     </td>
                                 </tr>
