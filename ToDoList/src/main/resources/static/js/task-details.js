@@ -30,6 +30,8 @@ $("#binhLuan").on("keydown", function(e){
    		var binhLuan = document.getElementById("binhLuan").value;
    		$("#tblBangBinhLuan").append('<tr> <td> <div class="d-flex flex-column comment-section"> <div class="bg-white p-2"> <div class="d-flex flex-row user-info justify-content-end"> <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Hà Minh Khôi</span><span class="date text-black-50 text-right">'+ getToday() +'</span></div> <img class="rounded-circle ml-2" src="img/HaMinhKhoi.jpg" width="40"> </div> <div class="mt-2"> <p class="text-gray-900 text-right">'+ binhLuan +'</div> </div> </div> </td> </tr>');
         scrollToBottomBangBinhLuan();
+        $('#commentForm').submit();
+        return false;
    	}
 });
 
@@ -39,6 +41,8 @@ $("#nhacNho").on("keydown", function(e){
    		var nhacNho = document.getElementById("nhacNho").value;
    		$("#tblBangNhacNho").append('<tr> <td> <div class="d-flex flex-column comment-section"> <div class="bg-white p-2"> <div class="d-flex flex-row user-info justify-content-end"> <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Hà Minh Khôi</span><span class="date text-black-50 text-right">'+ getToday() +'</span></div> <img class="rounded-circle ml-2" src="img/HaMinhKhoi.jpg" width="40"> </div> <div class="mt-2"> <p class="text-gray-900 text-right">'+ nhacNho +'</div> </div> </div> </td> </tr>');
         scrollToBottomBangNhacNho();
+        $('#reminderForm').submit();
+        return false;
    	}
 });
 

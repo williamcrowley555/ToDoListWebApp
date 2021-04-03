@@ -1,5 +1,6 @@
 package com.william.todolist;
 
+import com.william.todolist.model.Document;
 import com.william.todolist.model.Task;
 import com.william.todolist.model.User;
 import com.william.todolist.service.TaskService;
@@ -10,10 +11,16 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
+import javax.persistence.EntityManager;
+import java.io.IOException;
+
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(value = false)
 public class TaskServiceTest {
+
+    @Autowired
+    private EntityManager entityManager;
 
     @Autowired
     private TaskService taskService;
@@ -35,5 +42,13 @@ public class TaskServiceTest {
         User user = userService.getUserById(2L);
         task.removeParticipatedUser(user);
         taskService.saveTask(task);
+    }
+
+    @Test
+    public void testDeleteDocumentFromExistingTask() {
+        Task task = taskService.getTaskById(1L);
+        Document document = entityManager.find(Document.class, 11L);
+
+        task.removeDocument(document);
     }
 }

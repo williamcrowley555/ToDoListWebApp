@@ -1,5 +1,6 @@
 package com.william.todolist.controller;
 
+import com.william.todolist.model.Comment;
 import com.william.todolist.model.Document;
 import com.william.todolist.model.Task;
 import com.william.todolist.model.User;
@@ -163,6 +164,7 @@ public class TaskController {
 
         model.addAttribute("currentUser", currentUser);
         model.addAttribute("task", task);
+        model.addAttribute("comment", new Comment());
         return "task_details";
     }
 
@@ -201,6 +203,22 @@ public class TaskController {
         Document document = documentService.getDocumentById(documentId);
 
         documentService.deleteDocumentById(documentId);
+
+        return "redirect:/tasks/details/" + taskId;
+    }
+
+    @PostMapping("/add-comment")
+    public String addComment(@RequestParam("taskId") Long taskId,
+                             @ModelAttribute("comment") Comment comment) {
+        Task task = taskService.getTaskById(taskId);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userService.getUserByEmail(auth.getName());
+
+        comment.setCommentTime(new Date(System.currentTimeMillis()));
+        comment.setUser(currentUser);
+
+        task.addComment(comment);
+        taskService.saveTask(task);
 
         return "redirect:/tasks/details/" + taskId;
     }

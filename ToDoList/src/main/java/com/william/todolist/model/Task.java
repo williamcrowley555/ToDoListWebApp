@@ -66,7 +66,7 @@ public class Task {
     @OneToMany(mappedBy = "task", fetch = FetchType.EAGER)
     private Set<Document> documents = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "task_comment",
             joinColumns = @JoinColumn(name = "task_id"),
             inverseJoinColumns = @JoinColumn(name = "comment_id")
@@ -187,6 +187,14 @@ public class Task {
 
     public void removeDocument(Document document) {
         this.documents.remove(document);
+    }
+
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
+    }
+
+    public void removeComment(Comment comment) {
+        this.comments.remove(comment);
     }
 
     public String startDateFormat() {

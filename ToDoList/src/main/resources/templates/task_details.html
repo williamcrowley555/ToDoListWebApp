@@ -129,10 +129,14 @@
                                     </button>
                                 </div>
                                 <div class="my-4">
-                                    <input type="text" class="form-control form-rounded" placeholder="Nhập bình luận" id="binhLuan">
+                                    <form th:action="@{|/tasks/add-comment?taskId=${task.id}|}" th:object="${comment}" method="POST" id="commentForm">
+                                        <input th:field="*{content}" type="text" class="form-control form-rounded" placeholder="Nhập bình luận" id="binhLuan">
+                                    </form>
                                 </div>
                                 <div class="my-4">
-                                    <input type="text" class="form-control form-rounded" placeholder="Nhập nhắc nhở" id="nhacNho">
+                                    <form method="POST" id="reminderForm">
+                                        <input type="text" class="form-control form-rounded" placeholder="Nhập nhắc nhở" id="nhacNho">
+                                    </form>
                                 </div>
                                 <div>
 
@@ -143,54 +147,31 @@
                         <!-- Comments Table -->
                         <div class="table-wrapper-scroll- my-custom-scrollbar" id="divTbl">
                             <table class="table table-bordered borderless tblBangBinhLuan" id="tblBangBinhLuan">
-                                <thead class="text-center">
+                                <thead class="text-center bg-white">
                                 <tr>
                                     <th>Bảng bình luận</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex flex-column comment-section">
-                                            <div class="bg-white p-2">
-                                                <div class="d-flex flex-row user-info"><img class="rounded-circle" th:src="@{/img/undraw_profile.svg}" width="40">
-                                                    <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Bùi Quang Huy</span><span class="date text-black-50">01-04-2020</span></div>
+                                <tbody class="bg-white">
+                                    <th:block th:each="comment : ${task.comments}">
+                                        <tr>
+                                            <td class="pb-0">
+                                                <div class="d-flex flex-column comment-section">
+                                                    <div class="p-2">
+                                                        <div th:classappend="${currentUser == comment.user ? 'flex-row-reverse' : 'flex-row'}" class="d-flex user-info"><img class="rounded-circle" th:src="@{/img/undraw_profile.svg}" width="40">
+                                                            <div class="d-flex flex-column justify-content-start mx-2">
+                                                                <span th:text="${comment.user.fullName}" th:classappend="${currentUser == comment.user ? 'text-right' : ''}" class="d-block font-weight-bold name"></span>
+                                                                <span th:text="${comment.commentTime}" th:classappend="${currentUser == comment.user ? 'text-right' : ''}" class="date text-black-50"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div th:classappend="${currentUser == comment.user ? 'text-right' : ''}" class="mt-2">
+                                                            <p th:text="${comment.content}" class="text-gray-900"></p>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="mt-2">
-                                                    <p class="text-gray-900">Chỉnh sửa phần bình luận đi.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex flex-column comment-section">
-                                            <div class="bg-white p-2">
-                                                <div class="d-flex flex-row user-info"><img class="rounded-circle" src="img/NguyenDangKhoa.jpg" width="40">
-                                                    <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Nguyễn Đăng Khoa</span><span class="date text-black-50">02-04-2020</span></div>
-                                                </div>
-                                                <div class="mt-2">
-                                                    <p class="text-gray-900">Web chưa được đẹp, cần chỉnh sửa lại nha Khải</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex flex-column comment-section">
-                                            <div class="bg-white p-2">
-                                                <div class="d-flex flex-row user-info"><img class="rounded-circle" src="img/PhamDucKhai.jpg" width="40">
-                                                    <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Phạm Đức Khải</span><span class="date text-black-50">02-04-2020</span></div>
-                                                </div>
-                                                <div class="mt-2">
-                                                    <p class="text-gray-900">Tui đang chơi game, lát làm</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                            </td>
+                                        </tr>
+                                    </th:block>
                                 </tbody>
                             </table>
 

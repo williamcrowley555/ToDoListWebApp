@@ -12,8 +12,8 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "content", nullable = false)
+    private String content;
 
     @Column(name = "comment_time", nullable = false)
     private Date commentTime;
@@ -28,7 +28,7 @@ public class Comment {
 
     public Comment(Long id, String name, Date commentTime, @Valid User user) {
         this.id = id;
-        this.name = name;
+        this.content = name;
         this.commentTime = commentTime;
         this.user = user;
     }
@@ -41,12 +41,12 @@ public class Comment {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getContent() {
+        return content;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Date getCommentTime() {
@@ -69,7 +69,7 @@ public class Comment {
     public String toString() {
         return "Comment{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", content='" + content + '\'' +
                 ", commentTime=" + commentTime +
                 ", user=" + user +
                 '}';
