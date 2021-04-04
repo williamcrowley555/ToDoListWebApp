@@ -3,11 +3,7 @@ $(document).ready(
 );
 
 function init(){
-    paginate("#taskTable");
-    paginate("#incompleteTable");
-    paginate("#completeTable");
-    paginate("#overdueTable");
-    paginate("#employeeTable");
+    paginate(".table-pagination");
     $('#example').DataTable();
 }
 

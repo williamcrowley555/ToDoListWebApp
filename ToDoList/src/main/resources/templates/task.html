@@ -32,14 +32,16 @@
                         <a th:href="@{/tasks/add}" class="btn btn-success">
                             <i class="fas fa-plus mr-2"></i> Thêm Công Việc
                         </a>
-                        <label><input id="publicTasks" type="checkbox"> Hiển thị công việc của người khác </label>
+                        <th:block th:if="${!admin}">
+                            <label><input id="publicTasks" type="checkbox"> Hiển thị công việc của người khác </label>
+                        </th:block>
                     </div>
                 </div>
 
                 <div class="container-fluid">
 
                     <!-- Table -->
-                    <table class="table table-fluid" id="taskTable">
+                    <table class="table table-fluid table-pagination" id="taskTable">
                         <thead>
                             <tr>
                                 <th scope="col">Tiêu Đề</th>
