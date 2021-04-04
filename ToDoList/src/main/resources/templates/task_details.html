@@ -84,7 +84,7 @@
                                             <div th:if="${uploadError != null}" th:text="${uploadError}"
                                                  class="alert alert-danger" role="alert">Error Message
                                             </div>
-                                            <form th:action="@{/tasks/upload-document}" method="POST" class="input-group mb-3" enctype="multipart/form-data">
+                                            <form th:action="@{/tasks/upload-document}" th:if="${commentPermission}" method="POST" class="input-group mb-3" enctype="multipart/form-data">
                                                 <input type="hidden" name="taskId" th:value="${task.id}">
                                                 <div class="form-group w-100">
                                                     <input type="file" class="form-control-file" name="document">
@@ -103,7 +103,7 @@
                                     <div class="col-6 col-md-3 m-2 text-center">
                                         <div class="position-relative py-2">
                                             <img th:src="@{/img/document.png}" width="50">
-                                            <a th:href="@{|/tasks/delete-document/${document.id}?taskId=${task.id}|}" class="position-absolute" style="top: -20px; right:0;">
+                                            <a th:href="@{|/tasks/delete-document/${document.id}?taskId=${task.id}|}" th:if="${commentPermission}" class="position-absolute" style="top: -20px; right:0;">
                                                 <i class="fas fa-times-circle h5 text-danger"></i>
                                             </a>
                                         </div>

@@ -33,7 +33,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<Task> getPublicTaskNotIn(User user) {
+    public List<Task> getPublicUnrelatedTask(User user) {
         List<Task> publicTaskListNotInUser = taskRepository.findByUserNotIn(List.of(user));
         List<Long> participatedTaskIds = taskRepository.findByParticipatedUsers(user)
                                             .stream().map(item -> item.getId()).collect(Collectors.toList());

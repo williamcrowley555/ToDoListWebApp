@@ -46,7 +46,7 @@ public class TaskController {
         User currentUser = userService.getUserByEmail(auth.getName());
         Role adminRole = roleService.getRoleByNormalizedName("ROLE_ADMIN");
         List<Task> taskList = null;
-        List<Task> publicTaskList = taskService.getPublicTaskNotIn(currentUser);
+        List<Task> publicTaskList = taskService.getPublicUnrelatedTask(currentUser);
 
         if (currentUser.getRoles().contains(adminRole)) {
             taskList = taskService.getAllTask();
