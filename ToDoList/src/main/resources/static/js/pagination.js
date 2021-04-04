@@ -4,8 +4,9 @@ $(document).ready(
 
 function init(){
     paginate("#taskTable");
-    paginate("#completedTable");
-    paginate("#lateTable");
+    paginate("#incompleteTable");
+    paginate("#completeTable");
+    paginate("#overdueTable");
     paginate("#employeeTable");
     $('#example').DataTable();
 }

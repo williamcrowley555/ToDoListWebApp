@@ -24,6 +24,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class AppController {
@@ -54,8 +55,22 @@ public class AppController {
             taskList.addAll(taskService.getTaskByParticipatedUser(currentUser));
         }
 
+        List<Task> incompleteTasks = taskList.stream()
+                .filter(item -> item.getStatus() == 1)
+                .collect(Collectors.toList());
+
+        List<Task> completeTasks = taskList.stream()
+                                            .filter(item -> item.getStatus() == 2)
+                                            .collect(Collectors.toList());
+
+        List<Task> overdueTasks = taskList.stream()
+                .filter(item -> item.getStatus() == 3)
+                .collect(Collectors.toList());
+
         model.addAttribute("currentUser", currentUser);
-        model.addAttribute("taskList", taskList);
+        model.addAttribute("incompleteTasks", incompleteTasks);
+        model.addAttribute("completeTasks", completeTasks);
+        model.addAttribute("overdueTasks", overdueTasks);
 
         return "index";
     }

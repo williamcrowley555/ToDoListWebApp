@@ -43,7 +43,8 @@
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             Số lượng công việc
                                         </div>
-                                        <div th:text="${#lists.size(taskList)}" class="h5 mb-0 font-weight-bold text-gray-800 align-items-center"></div>
+                                        <div th:text="${#lists.size(incompleteTasks) + #lists.size(completeTasks) + #lists.size(overdueTasks)}"
+                                             class="h5 mb-0 font-weight-bold text-gray-800 align-items-center"></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-calendar fa-2x text-primary"></i>
@@ -61,7 +62,7 @@
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold font- text-success text-uppercase mb-1">
                                             Đã Hoàn Thành</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">2</div>
+                                        <div th:text="${#lists.size(completeTasks)}" class="h5 mb-0 font-weight-bold text-gray-800"></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-check fa-2x text-success"></i>
@@ -79,7 +80,7 @@
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                             Đang Thực Hiện</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">4</div>
+                                        <div th:text="${#lists.size(incompleteTasks)}" class="h5 mb-0 font-weight-bold text-gray-800"></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-user fa-2x text-warning"></i>
@@ -96,7 +97,7 @@
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                             Trễ Hạn</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">1</div>
+                                        <div th:text="${#lists.size(overdueTasks)}" class="h5 mb-0 font-weight-bold text-gray-800"></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-clock fa-2x text-danger"></i>
@@ -109,78 +110,59 @@
 
                 <!-- Content Row -->
                 <div class="row">
-                    <div class="mb-4 col-xl-6 col-lg-12">
+                    <div class="my-4 col-xl-6 col-lg-12">
                         <h1 class="h3 mb-0 text-gray-800 mb-4">Công Việc Đang Thực Hiện</h1>
-                        <table class="table table-bordered table-fluid" id="completedTable">
+                        <table class="table table-bordered table-fluid" id="incompleteTable">
                             <thead>
                             <tr class="bg-warning text-white"><th>Tiêu Đề</th><th>Ngày Bắt Đầu</th><th>Ngày Kết Thúc</th> <th>Phạm Vi</th></tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Soạn Tài Liệu</td>
-                                <td>21/04/2021</td>
-                                <td>29/04/2021</td>
-                                <td>Public</td>
-                            </tr>
-                            <tr>
-                                <td>Vẽ Sơ Đồ</td>
-                                <td>22/04/2021</td>
-                                <td>30/04/2021</td>
-                                <td>Public</td>
-                            </tr>
-                            <tr>
-                                <td>Thiết Kế Giao Diện</td>
-                                <td>01/04/2021</td>
-                                <td>28/04/2021</td>
-                                <td>Public</td>
-                            </tr>
-                            <tr>
-                                <td>Code</td>
-                                <td>03/04/2021</td>
-                                <td>15/05/2021</td>
-                                <td>Public</td>
-                            </tr>
-                            <tr>
-                                <td>Kiểm Thử</td>
-                                <td>15/05/2021</td>
-                                <td>20/05/2021</td>
-                                <td>Public</td>
-                            </tr>
+                                <th:block th:each="task : ${incompleteTasks}">
+                                    <tr>
+                                        <td th:text="${task.title}"></td>
+                                        <td th:text="${task.startDateFormat}"></td>
+                                        <td th:text="${task.endDateFormat}"></td>
+                                        <td th:text="${task.sector == 1 ? 'Public' : 'Private'}"></td>
+                                    </tr>
+                                </th:block>
                             </tbody>
                         </table>
                     </div>
 
-                    <div class="mb-4 col-xl-6 col-lg-12">
+                    <div class="my-4 col-xl-6 col-lg-12">
                         <h1 class="h3 mb-0 text-gray-800 mb-4 ml-md-3">Công Việc Đã Hoàn Thành</h1>
-                        <table class="table  table-bordered table-fluid" id="lateTable">
+                        <table class="table table-bordered table-fluid" id="completeTable">
                             <thead>
-                            <tr  class="bg-success text-white"><th>Tiêu Đề</th><th>Ngày Bắt Đầu</th><th>Ngày Kết Thúc</th> <th>Phạm Vi</th></tr>
+                            <tr class="bg-success text-white"><th>Tiêu Đề</th><th>Ngày Bắt Đầu</th><th>Ngày Kết Thúc</th> <th>Phạm Vi</th></tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>In tài liệu</td>
-                                <td>21/03/2021</td>
-                                <td>29/03/2021</td>
-                                <td>Public</td>
-                            </tr>
-                            <tr>
-                                <td>Viết Bài</td>
-                                <td>22/03/2021</td>
-                                <td>30/03/2021</td>
-                                <td>Private</td>
-                            </tr>
-                            <tr>
-                                <td>Đăng Bài</td>
-                                <td>01/04/2021</td>
-                                <td>28/04/2021</td>
-                                <td>Public</td>
-                            </tr>
-                            <tr>
-                                <td>Báo Cáo</td>
-                                <td>03/03/2021</td>
-                                <td>15/04/2021</td>
-                                <td>Public</td>
-                            </tr>
+                                <th:block th:each="task : ${completeTasks}">
+                                    <tr>
+                                        <td th:text="${task.title}"></td>
+                                        <td th:text="${task.startDateFormat}"></td>
+                                        <td th:text="${task.endDateFormat}"></td>
+                                        <td th:text="${task.sector == 1 ? 'Public' : 'Private'}"></td>
+                                    </tr>
+                                </th:block>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="my-4 col-xl-6 col-lg-12">
+                        <h1 class="h3 mb-0 text-gray-800 mb-4 ml-md-3">Công Việc Trễ Hạn</h1>
+                        <table class="table table-bordered table-fluid" id="overdueTable">
+                            <thead>
+                            <tr class="bg-danger text-white"><th>Tiêu Đề</th><th>Ngày Bắt Đầu</th><th>Ngày Kết Thúc</th> <th>Phạm Vi</th></tr>
+                            </thead>
+                            <tbody>
+                            <th:block th:each="task : ${overdueTasks}">
+                                <tr>
+                                    <td th:text="${task.title}"></td>
+                                    <td th:text="${task.startDateFormat}"></td>
+                                    <td th:text="${task.endDateFormat}"></td>
+                                    <td th:text="${task.sector == 1 ? 'Public' : 'Private'}"></td>
+                                </tr>
+                            </th:block>
                             </tbody>
                         </table>
                     </div>
