@@ -89,7 +89,7 @@
                                                 <div class="form-group w-100">
                                                     <input type="file" class="form-control-file" name="document">
                                                 </div>
-                                                <input type="submit" class="btn btn-primary" value="Tải lên">
+                                                <input type="submit" class="btn btn-primary" value="Tải lên" required>
                                             </form>
                                         </th>
                                     </tr>
@@ -108,7 +108,7 @@
                                             </a>
                                         </div>
                                         <div>
-                                            <a th:href="@{/}" th:text="${document.name}"></a>
+                                            <a th:href="@{|/tasks/download-document?id=${document.id}|}" th:text="${document.name}"></a>
                                         </div>
                                         <div>
                                             <span>[[${#numbers.formatInteger(document.size, 4 , 'COMMA')}]] bytes</span>

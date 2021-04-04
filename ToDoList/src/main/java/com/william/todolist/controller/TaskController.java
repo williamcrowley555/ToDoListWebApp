@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Date;
@@ -248,6 +250,22 @@ public class TaskController {
         documentService.saveDocument(document);
 
         return "redirect:/tasks/details/" + taskId;
+    }
+
+    @GetMapping("/download-document")
+    public void downloadDocument(@RequestParam("id") Long id, HttpServletResponse response) throws IOException {
+        Document document = documentService.getDocumentById(id);
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=" + document.getName();
+
+        response.setContentType("application/octet-stream");
+        response.setHeader(headerKey, headerValue);
+
+        ServletOutputStream outputStream = response.getOutputStream();
+
+        outputStream.write(document.getContent());
+        outputStream.close();
     }
 
     @GetMapping("/delete-document/{id}")
