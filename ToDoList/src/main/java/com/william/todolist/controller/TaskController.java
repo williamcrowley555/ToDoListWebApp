@@ -45,8 +45,8 @@ public class TaskController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = userService.getUserByEmail(auth.getName());
         Role adminRole = roleService.getRoleByNormalizedName("ROLE_ADMIN");
-        System.out.println(adminRole);
         List<Task> taskList = null;
+        List<Task> publicTaskList = taskService.getPublicTaskNotIn(currentUser);
 
         if (currentUser.getRoles().contains(adminRole)) {
             taskList = taskService.getAllTask();
@@ -56,8 +56,10 @@ public class TaskController {
         }
 
         model.addAttribute("currentUser", currentUser);
-        model.addAttribute("taskList", taskList);
         model.addAttribute("admin", currentUser.getRoles().contains(adminRole));
+        model.addAttribute("taskList", taskList);
+        model.addAttribute("publicTaskList", publicTaskList);
+
         return "task";
     }
 
@@ -201,10 +203,19 @@ public class TaskController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = userService.getUserByEmail(auth.getName());
         Task task = taskService.getTaskById(id);
+        boolean commentPermission = true;
+
+        List<Task> currentUserTaskList = taskService.getTaskByUser(currentUser);
+        currentUserTaskList.addAll(taskService.getTaskByParticipatedUser(currentUser));
+
+        if (currentUserTaskList.contains(task) == false) {
+            commentPermission = false;
+        }
 
         model.addAttribute("currentUser", currentUser);
         model.addAttribute("task", task);
         model.addAttribute("comment", new Comment());
+        model.addAttribute("commentPermission", commentPermission);
         model.addAttribute("reminder", new Reminder());
 
         return "task_details";

@@ -132,7 +132,7 @@
                                         Nhắc nhở
                                     </button>
                                 </div>
-                                <div class="my-4">
+                                <div th:if="${commentPermission}" class="my-4">
                                     <form th:action="@{|/tasks/add-comment?taskId=${task.id}|}" th:object="${comment}" method="POST" id="commentForm">
                                         <input th:field="*{content}" type="text" class="form-control form-rounded" placeholder="Nhập bình luận" id="binhLuan">
                                     </form>

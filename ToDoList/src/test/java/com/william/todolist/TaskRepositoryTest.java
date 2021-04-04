@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -64,5 +65,21 @@ public class TaskRepositoryTest {
 //        Add cascade = CascadeType.ALL, orphanRemoval = true as parameter of @OneToMany
 //        Work because of @DataJPATest
 //        task.removeDocument(new Document(7L));
+    }
+
+    @Test
+    public void testGetPublicTaskExceptTaskOfUser() {
+        User user = entityManager.find(User.class, 11L);
+
+        List<Task> publicTaskListNotInUser = taskRepository.findByUserNotIn(List.of(user));
+        List<Long> participatedTaskIds = taskRepository.findByParticipatedUsers(user)
+                                            .stream().map(item -> item.getId()).collect(Collectors.toList());
+
+        List<Task> publicTaskListNotInParticipatedUser = taskRepository.findByIdNotIn(participatedTaskIds);
+        List<Task> publicTaskList = publicTaskListNotInUser.stream()
+                                                        .filter(item -> publicTaskListNotInParticipatedUser.contains(item))
+                                                        .collect(Collectors.toList());
+
+        publicTaskList.forEach(System.out::println);
     }
 }

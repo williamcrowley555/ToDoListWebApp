@@ -41,8 +41,9 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                            Số lượng công việc</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800 align-items-center">6</div>
+                                            Số lượng công việc
+                                        </div>
+                                        <div th:text="${#lists.size(taskList)}" class="h5 mb-0 font-weight-bold text-gray-800 align-items-center"></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-calendar fa-2x text-primary"></i>

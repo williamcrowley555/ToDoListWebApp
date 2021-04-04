@@ -3,7 +3,7 @@ $(document).ready(
 );
 
 function init(){
-    paginate("#worksTable");
+    paginate("#taskTable");
     paginate("#completedTable");
     paginate("#lateTable");
     paginate("#employeeTable");

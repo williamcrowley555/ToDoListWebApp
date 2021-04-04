@@ -2,9 +2,11 @@ package com.william.todolist.controller;
 
 import com.william.todolist.helper.Message;
 import com.william.todolist.model.Role;
+import com.william.todolist.model.Task;
 import com.william.todolist.model.User;
 import com.william.todolist.security.CustomUserDetails;
 import com.william.todolist.service.RoleService;
+import com.william.todolist.service.TaskService;
 import com.william.todolist.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -35,8 +37,26 @@ public class AppController {
     @Autowired
     private RoleService roleService;
 
+    @Autowired
+    private TaskService taskService;
+
     @GetMapping("")
-    public String viewHomePage() {
+    public String viewHomePage(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userService.getUserByEmail(auth.getName());
+        Role adminRole = roleService.getRoleByNormalizedName("ROLE_ADMIN");
+        List<Task> taskList = null;
+
+        if (currentUser.getRoles().contains(adminRole)) {
+            taskList = taskService.getAllTask();
+        } else {
+            taskList = taskService.getTaskByUser(currentUser);
+            taskList.addAll(taskService.getTaskByParticipatedUser(currentUser));
+        }
+
+        model.addAttribute("currentUser", currentUser);
+        model.addAttribute("taskList", taskList);
+
         return "index";
     }
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -29,6 +30,20 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<Task> getTaskByParticipatedUser(User user) {
         return taskRepository.findByParticipatedUsers(user);
+    }
+
+    @Override
+    public List<Task> getPublicTaskNotIn(User user) {
+        List<Task> publicTaskListNotInUser = taskRepository.findByUserNotIn(List.of(user));
+        List<Long> participatedTaskIds = taskRepository.findByParticipatedUsers(user)
+                                            .stream().map(item -> item.getId()).collect(Collectors.toList());
+
+        List<Task> publicTaskListNotInParticipatedUser = taskRepository.findByIdNotIn(participatedTaskIds);
+        List<Task> publicTaskList = publicTaskListNotInUser.stream()
+                .filter(item -> publicTaskListNotInParticipatedUser.contains(item))
+                .collect(Collectors.toList());
+
+        return publicTaskList;
     }
 
     @Override

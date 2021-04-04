@@ -10,6 +10,7 @@ public interface TaskService {
     List<Task> getAllTask();
     List<Task> getTaskByUser(User user);
     List<Task> getTaskByParticipatedUser(User user);
+    List<Task> getPublicTaskNotIn(User user);
     Task getTaskById(Long id);
     Task saveTask(Task task);
     void deleteTaskById(Long id);

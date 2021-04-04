@@ -28,17 +28,18 @@
                 <!-- Page Heading -->
                 <div class="container-fluid mt-4 mb-4 mr-3">
                     <h1 class="h3 mb-0 text-gray-800">Quản Lý Công Việc</h1>
-                    <a href="./add-work.html">
-                        <a th:href="@{/tasks/add}" class="btn  btn-success mt-4">
+                    <div class="d-flex align-items-center justify-content-between mt-4">
+                        <a th:href="@{/tasks/add}" class="btn btn-success">
                             <i class="fas fa-plus mr-2"></i> Thêm Công Việc
                         </a>
-                    </a>
+                        <label><input id="publicTasks" type="checkbox"> Hiển thị công việc của người khác </label>
+                    </div>
                 </div>
 
                 <div class="container-fluid">
 
                     <!-- Table -->
-                    <table class="table table-fluid" id="worksTable">
+                    <table class="table table-fluid" id="taskTable">
                         <thead>
                             <tr>
                                 <th scope="col">Tiêu Đề</th>
@@ -51,8 +52,10 @@
                             </tr>
                         </thead>
                         <tbody>
+
+<!--                            User's Tasks-->
                             <th:block th:each="task : ${taskList}">
-                                <tr>
+                                <tr class="related-task">
                                     <th th:text="${task.title}" scope="row"></th>
                                     <td th:text="${task.startDateFormat}"></td>
                                     <td th:text="${task.endDateFormat}"></td>
@@ -79,6 +82,28 @@
                                     </td>
                                 </tr>
                             </th:block>
+<!--                            End of User's Tasks-->
+
+<!--                            Public Tasks-->
+                            <th:block th:if="${!admin}" th:each="task : ${publicTaskList}">
+                                <tr class="d-none unrelated-task">
+                                    <th th:text="${task.title}" scope="row"></th>
+                                    <td th:text="${task.startDateFormat}"></td>
+                                    <td th:text="${task.endDateFormat}"></td>
+                                    <td th:text="${task.completeDate == null ? 'Chưa hoàn thành' : task.completeDateFormat}"></td>
+                                    <td th:text="${task.sector == 1 ? 'Public' : 'Private'}"></td>
+                                    <th:block th:switch="${task.status}">
+                                        <td th:case="1">Đang thực hiện</td>
+                                        <td th:case="2">Hoàn thành</td>
+                                        <td th:case="3">Trễ hạn</td>
+                                    </th:block>
+                                    <td>
+                                        <a th:href="@{|/tasks/details/${task.id}|}" class="btn btn-primary"><i class="far fa-eye"></i></a>
+                                    </td>
+                                </tr>
+                            </th:block>
+<!--                            End of Public Tasks-->
+
                         </tbody>
                     </table>
                 </div>
@@ -127,6 +152,17 @@
 
 <th:block th:replace="fragments/script :: scripts"></th:block>
 <th:block th:replace="fragments/script :: extra_scripts"></th:block>
+<script>
+    $('#publicTasks').change(function() {
+        if($(this).is(':checked')) {
+            $('.related-task').addClass('d-none');
+            $('.unrelated-task').removeClass('d-none');
+        } else {
+            $('.related-task').removeClass('d-none');
+            $('.unrelated-task').addClass('d-none');
+        }
+    });
+</script>
 
 </body>
 </html>
