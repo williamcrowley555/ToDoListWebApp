@@ -1,5 +1,6 @@
 package com.william.todolist.controller;
 
+import Utils.TaskUtils;
 import com.william.todolist.model.*;
 import com.william.todolist.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,6 +98,8 @@ public class TaskController {
             return "task_form";
         }
 
+        TaskUtils.updateStatus(task);
+
         taskService.saveTask(task);
         return "redirect:/tasks/invite-users/" + task.getId();
     }
@@ -119,12 +122,13 @@ public class TaskController {
             Task oldTask = taskService.getTaskById(task.getId());
 
             task.setCompleteDate(oldTask.getCompleteDate());
-            task.setStatus(oldTask.getStatus());
             task.setUser(oldTask.getUser());
             task.setParticipatedUsers(oldTask.getParticipatedUsers());
             task.setDocuments(oldTask.getDocuments());
             task.setComments(oldTask.getComments());
             task.setReminders(oldTask.getReminders());
+
+            TaskUtils.updateStatus(task);
 
             taskService.saveTask(task);
         }

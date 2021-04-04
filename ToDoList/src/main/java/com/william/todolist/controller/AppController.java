@@ -1,5 +1,6 @@
 package com.william.todolist.controller;
 
+import Utils.TaskUtils;
 import com.william.todolist.helper.Message;
 import com.william.todolist.model.Role;
 import com.william.todolist.model.Task;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -77,6 +79,12 @@ public class AppController {
 
     @GetMapping("/login")
     public String showLoginPage() {
+//        Update all tasks status
+
+        for (Task task : taskService.getAllTask()) {
+            TaskUtils.updateStatus(task);
+        }
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (auth instanceof AnonymousAuthenticationToken) {
