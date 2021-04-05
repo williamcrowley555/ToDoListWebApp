@@ -40,7 +40,7 @@ public class TaskServiceImpl implements TaskService {
 
         List<Task> publicTaskListNotInParticipatedUser = taskRepository.findByIdNotIn(participatedTaskIds);
         List<Task> publicTaskList = publicTaskListNotInUser.stream()
-                .filter(item -> publicTaskListNotInParticipatedUser.contains(item))
+                .filter(item -> publicTaskListNotInParticipatedUser.contains(item) && item.getSector() == 1)
                 .collect(Collectors.toList());
 
         return publicTaskList;

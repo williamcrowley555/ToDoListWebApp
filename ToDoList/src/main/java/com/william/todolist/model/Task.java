@@ -45,11 +45,16 @@ public class Task {
     @NotNull(message = "Hãy chọn phạm vi")
     @Min(value = 1)
     @Max(value = 5)
+//    1: Inconplete
+//    2: Complete
+//    3: Overdue
     private Integer sector;
 
     @Column(name = "status", nullable = false)
     @Min(value = 1)
     @Max(value = 5)
+//    1: Public
+//    2: Private
     private Integer status = 1;
 
     @ManyToOne
