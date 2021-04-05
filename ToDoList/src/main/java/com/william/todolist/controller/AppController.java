@@ -79,12 +79,6 @@ public class AppController {
 
     @GetMapping("/login")
     public String showLoginPage() {
-//        Update all tasks status
-
-        for (Task task : taskService.getAllTask()) {
-            TaskUtils.updateStatus(task);
-        }
-
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (auth instanceof AnonymousAuthenticationToken) {
