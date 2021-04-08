@@ -143,9 +143,6 @@ public class TaskController {
         task.setParticipatedUsers(null);
         taskService.saveTask(task);
 
-        commentService.deleteAllComment(task.getComments());
-        reminderService.deleteAllComment(task.getReminders());
-
         taskService.deleteTaskById(id);
 
         return "redirect:/tasks";
