@@ -7,6 +7,7 @@ import java.util.List;
 public interface UserService {
 
     List<User> getAllUser();
+    List<User> getAllEnableUser();
     List<User> getAllParticipatedUsersByTaskId(Long taskId);
     List<User> getAllUnparticipatedUsersByTaskId(Long taskId);
     User getUserById(Long id);

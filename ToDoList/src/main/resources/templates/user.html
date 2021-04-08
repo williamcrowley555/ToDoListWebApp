@@ -27,7 +27,10 @@
 
                 <!-- Page Heading -->
                 <div class="container-fluid mt-4 mb-4 mr-3">
-                    <h1 class="h3 mb-0 text-gray-800">Quản Lý Nhân Viên</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Quản Lý Người Dùng</h1>
+                    <div class="text-right mt-4">
+                        <label><input id="disableUsers" type="checkbox"> Hiển thị người dùng bị vô hiệu hóa </label>
+                    </div>
                 </div>
 
                 <div class="container-fluid">
@@ -45,18 +48,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="user : ${userList}">
-                                <th th:text="${user.id}" scope="row"></th>
-                                <th th:text="${user.fullName}" scope="row"></th>
-                                <td th:text="${user.dobFormat}"></td>
-                                <td th:text="${user.gender == 0 ? 'Nữ' : 'Nam'}"></td>
-                                <td th:text="${user.email}"></td>
-                                <td th:text="${user.roles}"></td>
-                                <td>
-                                    <a th:href="@{|/users/edit/${user.id}|}" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                                    <a th:href="@{|/users/delete/${user.id}|}" th:onclick="|return confirm('Bạn có chắc muốn xóa người dùng có ID: ${user.id}?')|" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
-                                </td>
-                            </tr>
+                            <th:block th:each="user : ${userList}">
+                                <tr th:classappend="${user.enabled ? 'enabled-user' : 'disabled-user d-none'}">
+                                    <th th:text="${user.id}" scope="row"></th>
+                                    <th th:text="${user.fullName}" scope="row"></th>
+                                    <td th:text="${user.dobFormat}"></td>
+                                    <td th:text="${user.gender == 0 ? 'Nữ' : 'Nam'}"></td>
+                                    <td th:text="${user.email}"></td>
+                                    <td th:text="${user.roles}"></td>
+                                    <td>
+                                        <a th:href="@{|/users/edit/${user.id}|}" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                        <th:block th:if="${user.enabled}">
+                                            <a th:href="@{|/users/disable/${user.id}|}" class="btn btn-danger"><i class="fas fa-times"></i></a>
+                                        </th:block>
+                                        <th:block th:unless="${user.enabled}">
+                                            <a th:href="@{|/users/enable/${user.id}|}" class="btn btn-success"><i class="fas fa-check"></i></a>
+                                        </th:block>
+                                    </td>
+                                </tr>
+                            </th:block>
                         </tbody>
                     </table>
                 </div>
@@ -105,6 +115,16 @@
 
 <th:block th:replace="fragments/script :: scripts"></th:block>
 <th:block th:replace="fragments/script :: extra_scripts"></th:block>
-
+<script>
+    $('#disableUsers').change(function() {
+        if($(this).is(':checked')) {
+            $('.enabled-user').addClass('d-none');
+            $('.disabled-user').removeClass('d-none');
+        } else {
+            $('.enabled-user').removeClass('d-none');
+            $('.disabled-user').addClass('d-none');
+        }
+    });
+</script>
 </body>
 </html>

@@ -68,6 +68,24 @@ public class UserController {
         return "redirect:/users";
     }
 
+    @GetMapping("/enable/{id}")
+    public String enableUser(@PathVariable("id") Long id) {
+        User user = userService.getUserById(id);
+        user.setEnabled(true);
+        userService.saveUser(user);
+
+        return "redirect:/users";
+    }
+
+    @GetMapping("/disable/{id}")
+    public String disableUser(@PathVariable("id") Long id) {
+        User user = userService.getUserById(id);
+        user.setEnabled(false);
+        userService.saveUser(user);
+
+        return "redirect:/users";
+    }
+
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUserById(id);

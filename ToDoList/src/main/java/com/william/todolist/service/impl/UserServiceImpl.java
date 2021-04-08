@@ -34,6 +34,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> getAllEnableUser() {
+        return userRepository.findAll().stream().filter(item -> item.isEnabled()).collect(Collectors.toList());
+    }
+
+    @Override
     public List<User> getAllParticipatedUsersByTaskId(Long taskId) {
         List<User> participatedUsers = new ArrayList<>();
         Optional<Task> task = taskRepository.findById(taskId);
@@ -105,6 +110,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUserById(Long id) {
-        userRepository.deleteById(id);
+        User user = null;
+        Optional<User> optional = userRepository.findById(id);
+
+        if (optional.isPresent()) {
+            user = optional.get();
+        } else {
+            throw new RuntimeException("User ID: " + id + " does not exist");
+        }
+
+        user.setEnabled(false);
+        userRepository.save(user);
     }
 }

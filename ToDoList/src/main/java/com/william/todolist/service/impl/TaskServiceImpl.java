@@ -39,8 +39,15 @@ public class TaskServiceImpl implements TaskService {
         List<Task> publicTaskListNotInUser = taskRepository.findByUserNotIn(List.of(user));
         List<Long> participatedTaskIds = taskRepository.findByParticipatedUsers(user)
                                             .stream().map(item -> item.getId()).collect(Collectors.toList());
+        List<Task> publicTaskListNotInParticipatedUser;
 
-        List<Task> publicTaskListNotInParticipatedUser = taskRepository.findByIdNotIn(participatedTaskIds);
+        if (participatedTaskIds.isEmpty()) {
+            publicTaskListNotInParticipatedUser = publicTaskListNotInUser;
+        } else {
+            publicTaskListNotInParticipatedUser = taskRepository.findByIdNotIn(participatedTaskIds);
+        }
+
+        publicTaskListNotInParticipatedUser.forEach(System.out::println);
         List<Task> publicTaskList = publicTaskListNotInUser.stream()
                 .filter(item -> publicTaskListNotInParticipatedUser.contains(item) && item.getSector() == 1)
                 .collect(Collectors.toList());
