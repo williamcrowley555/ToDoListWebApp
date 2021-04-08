@@ -70,7 +70,7 @@ public class Task {
     @Valid
     private Set<User> participatedUsers = new HashSet<>();
 
-    @OneToMany(mappedBy = "task", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "task", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Set<Document> documents = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

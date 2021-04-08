@@ -1,12 +1,11 @@
 package com.william.todolist.service.impl;
 
-import Utils.TaskUtils;
+import com.william.todolist.utils.TaskUtils;
 import com.william.todolist.model.Task;
 import com.william.todolist.model.User;
 import com.william.todolist.repository.TaskRepository;
 import com.william.todolist.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;

@@ -1,4 +1,4 @@
-package Utils;
+package com.william.todolist.utils;
 
 import com.william.todolist.model.Task;
 import com.william.todolist.service.TaskService;

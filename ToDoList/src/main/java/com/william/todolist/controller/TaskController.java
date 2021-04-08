@@ -1,6 +1,6 @@
 package com.william.todolist.controller;
 
-import Utils.TaskUtils;
+import com.william.todolist.utils.TaskUtils;
 import com.william.todolist.model.*;
 import com.william.todolist.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -143,7 +143,6 @@ public class TaskController {
         task.setParticipatedUsers(null);
         taskService.saveTask(task);
 
-        documentService.deleteAllDocument(task.getDocuments());
         commentService.deleteAllComment(task.getComments());
         reminderService.deleteAllComment(task.getReminders());
 
