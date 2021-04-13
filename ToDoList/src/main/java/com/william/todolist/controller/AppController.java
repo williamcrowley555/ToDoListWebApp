@@ -122,10 +122,8 @@ public class AppController {
     @GetMapping("/edit-profile")
     public String showEditUserForm(Model model, Principal principal) {
         User user = userService.getUserByEmail(principal.getName());
-        List<Role> roleList = roleService.getAllRole();
 
         model.addAttribute("user", user);
-        model.addAttribute("roleList", roleList);
         return "user_profile_form";
     }
 
