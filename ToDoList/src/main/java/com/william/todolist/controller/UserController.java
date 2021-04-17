@@ -8,6 +8,7 @@ import com.william.todolist.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -50,8 +51,8 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public String saveUser(Model model, @Valid @ModelAttribute("user") User user,
-                                       BindingResult bindingResult) {
+    public String saveUser(Model model, @AuthenticationPrincipal CustomUserDetails loggedUser,
+                           @Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
         User currentUser = userService.getUserById(user.getId());
         user.setPassword(currentUser.getPassword());
 
@@ -64,6 +65,11 @@ public class UserController {
         }
 
         userService.saveUser(user);
+
+        if (user.getEmail().equals(loggedUser.getUsername())) {
+            loggedUser.setFirstName(user.getFirstName());
+            loggedUser.setLastName(user.getLastName());
+        }
 
         return "redirect:/users";
     }

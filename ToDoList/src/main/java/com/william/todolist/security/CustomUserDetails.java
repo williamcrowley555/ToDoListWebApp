@@ -63,4 +63,20 @@ public class CustomUserDetails implements UserDetails {
     public String getFullName() {
         return user.getLastName() + " " + user.getFirstName();
     }
+
+    public void setUsername(String userName) {
+        this.user.setEmail(userName);
+    }
+
+    public void setFirstName(String firstName) {
+        this.user.setFirstName(firstName);
+    }
+
+    public void setLastName(String lastName) {
+        this.user.setLastName(lastName);
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.user.setRoles(roles);
+    }
 }

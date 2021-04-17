@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -128,8 +129,8 @@ public class AppController {
     }
 
     @PostMapping("/save-profile")
-    public String saveProfile(Model model, @Valid @ModelAttribute("user") User user,
-                           BindingResult bindingResult) {
+    public String saveProfile(Model model, @AuthenticationPrincipal CustomUserDetails loggedUser,
+                              @Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
         User existingUser = userService.getUserByEmail(user.getEmail());
 
         if (user.getId() != null) {
@@ -161,7 +162,9 @@ public class AppController {
         }
 
         userService.saveUser(user);
-        reloadAuthentication(user);
+        loggedUser.setUsername(user.getEmail());
+        loggedUser.setFirstName(user.getFirstName());
+        loggedUser.setLastName(user.getLastName());
 
         return "redirect:/profile";
     }
@@ -198,9 +201,9 @@ public class AppController {
         return "403";
     }
 
-    public void reloadAuthentication(User user) {
-        UserDetails userDetails = new CustomUserDetails(user);
-        Authentication newAuth = new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
-        SecurityContextHolder.getContext().setAuthentication(newAuth);
-    }
+//    public void reloadAuthentication(User user) {
+//        UserDetails userDetails = new CustomUserDetails(user);
+//        Authentication newAuth = new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
+//        SecurityContextHolder.getContext().setAuthentication(newAuth);
+//    }
 }
